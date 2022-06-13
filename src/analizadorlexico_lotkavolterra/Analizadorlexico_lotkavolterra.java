@@ -29,10 +29,10 @@ public class Analizadorlexico_lotkavolterra {
         this.fuente = fuente;
     }
 
-    public void iniciarProceso() {
+    public void iniciarProceso() throws Exception{
         caracter = fuente.charAt(posicion);
         switch (estado) {
-            case 0:
+            case 0:{
                 if (caracter == ',') {
                     nombreEstadoCero("P_COMA");
                 } else if (caracter == '(') {
@@ -56,12 +56,18 @@ public class Analizadorlexico_lotkavolterra {
                 } else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
 
                 } else {
-                    System.out.println("Error No se encuentra caracter");
+           
+                     System.out.println("Error");
+                     throw new ExceptionError("Desconocido: " +caracter);
+                    
                 }
                 break;
-            case 1:
+            }
+            case 1:{
                 if (caracter == ';') {
-                    nombresEstados("DERIVADA ", " P_COMA");
+                    nombresEstados("DERIVADA ", " P_COMA");}
+                else if(caracter == ';'){
+                     nombresEstados("DERIVADA ", " P_COMA");                  
                 } else if (caracter == '(') {
                     nombresEstados("DERIVADA ", " PARENTESIS_A");
                 } else if (caracter == ')') {
@@ -85,7 +91,8 @@ public class Analizadorlexico_lotkavolterra {
                     System.out.println("ERROR");
                 }
                 break;
-            case 2:
+            }
+            case 2:{
                  if(caracter == ';'){
                     nombresEstados("NUMERO "," P-COMA");
                     estado = 0;
@@ -118,6 +125,7 @@ public class Analizadorlexico_lotkavolterra {
                     System.out.println("ERROR");
                 }
                 break;
+            }
                 default:break;
         }
         posicion++;
@@ -151,9 +159,13 @@ public class Analizadorlexico_lotkavolterra {
 
     public static void main(String[] args) {
         // TODO code application logic here
-        Analizadorlexico_lotkavolterra analizarVolt= new Analizadorlexico_lotkavolterra("Dx = (10*25) + (25*10); Dy = (1*25) - (15*10);");
-        analizarVolt.iniciarProceso();
-        analizarVolt.imprimir();
+        Analizadorlexico_lotkavolterra analizarVolt= new Analizadorlexico_lotkavolterra(" Dx= (10*25) + (25*10) Dy = (1*25) - (15*10) ");
+        try {
+            analizarVolt.iniciarProceso();
+            analizarVolt.imprimir();
+        } catch (Exception e) {
+        }
+    
     }
   
 }
