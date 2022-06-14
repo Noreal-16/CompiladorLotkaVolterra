@@ -57,7 +57,7 @@ public class Analizadorlexico_lotkavolterra {
 
                 } else {
            
-                    // System.out.println("Error");
+                   System.out.println("Error"+ caracter.toString());
                    throw new ExceptionError("Desconocido: " +caracter);
                     
                 }
@@ -127,8 +127,8 @@ public class Analizadorlexico_lotkavolterra {
                     estado = 0;
                     lexema = "";
                 }else  {
-                    System.out.println("ERROR");
-                         throw new ExceptionError("Desconocido: " +caracter);
+                   System.out.println("Error:  "+ caracter.toString());
+                   throw new ExceptionError("Desconocido: " +caracter);
                 }
                 break;
             }
@@ -166,7 +166,7 @@ public class Analizadorlexico_lotkavolterra {
 
     public static void main(String[] args) {
         // TODO code application logic here
-        Analizadorlexico_lotkavolterra analizarVolt= new Analizadorlexico_lotkavolterra("  miguel ");
+        Analizadorlexico_lotkavolterra analizarVolt= new Analizadorlexico_lotkavolterra("  Dx / = 20 + 30 ");
         try {
             analizarVolt.iniciarProceso();
             analizarVolt.imprimir();
