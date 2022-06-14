@@ -8,22 +8,22 @@ package analizadorlexico_lotkavolterra;
  *
  * @author Darkside
  */
-public class Exception_Lotka {
+public class ExceptionError extends Exception{
 
     /**
-     * Creates a new instance of <code>Exception_Lotka</code> without detail
+     * Creates a new instance of <code>ExceptionError</code> without detail
      * message.
      */
-    public Exception_Lotka() {
+    public ExceptionError() {
     }
 
     /**
-     * Constructs an instance of <code>Exception_Lotka</code> with the specified
+     * Constructs an instance of <code>ExceptionError</code> with the specified
      * detail message.
      *
      * @param msg the detail message.
      */
-    public Exception_Lotka(String msg) {
+    public ExceptionError(String msg) {
         super(msg);
     }
 }

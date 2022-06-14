@@ -57,8 +57,8 @@ public class Analizadorlexico_lotkavolterra {
 
                 } else {
            
-                     System.out.println("Error");
-                     throw new ExceptionError("Desconocido: " +caracter);
+                    // System.out.println("Error");
+                   throw new ExceptionError("Desconocido: " +caracter);
                     
                 }
                 break;
@@ -86,9 +86,14 @@ public class Analizadorlexico_lotkavolterra {
                     listaLexema.add(lexema);
                     listaTokens.add("DERIVADA");
                     estado = 0;
-                    lexema = "";
-                } else {
-                    System.out.println("ERROR");
+                    lexema = "";                  
+                } 
+                else if(caracter == ':' ){
+                    //System.out.println("ERROR");
+                    throw new ExceptionError("Caracter desconocido "+caracter);
+                }
+                else {
+                         throw new ExceptionError("Desconocido: " +caracter);
                 }
                 break;
             }
@@ -123,6 +128,7 @@ public class Analizadorlexico_lotkavolterra {
                     lexema = "";
                 }else  {
                     System.out.println("ERROR");
+                         throw new ExceptionError("Desconocido: " +caracter);
                 }
                 break;
             }
@@ -136,9 +142,10 @@ public class Analizadorlexico_lotkavolterra {
         }
     }
 
-    private void imprimir() {
+    private void imprimir() throws Exception{
         for (int i = 0; i < listaLexema.size(); i++) {
             System.out.println("TOKEN : " + listaTokens.get(i) + "  LEXEMA : " + listaLexema.get(i));
+
         }
     }
 
@@ -159,7 +166,7 @@ public class Analizadorlexico_lotkavolterra {
 
     public static void main(String[] args) {
         // TODO code application logic here
-        Analizadorlexico_lotkavolterra analizarVolt= new Analizadorlexico_lotkavolterra(" Dx= (10*25) + (25*10) Dy = (1*25) - (15*10) ");
+        Analizadorlexico_lotkavolterra analizarVolt= new Analizadorlexico_lotkavolterra("  miguel ");
         try {
             analizarVolt.iniciarProceso();
             analizarVolt.imprimir();
