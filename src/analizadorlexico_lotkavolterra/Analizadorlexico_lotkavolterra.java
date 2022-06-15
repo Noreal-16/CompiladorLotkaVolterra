@@ -14,9 +14,7 @@ import java.util.List;
 
 public class Analizadorlexico_lotkavolterra {
 
-    /**
-     * @param args the command line arguments
-     */
+    private Boolean estadoError = false;
     private String fuente;
     private String lexema = "";
     private Integer estado = 0;
@@ -24,128 +22,183 @@ public class Analizadorlexico_lotkavolterra {
     private Character caracter = ' ';
     private List<String> listaTokens = new ArrayList<>();
     private List<String> listaLexema = new ArrayList<>();
+    private String preservada = "Dx";
+    private String preservada1 = "Dy";
 
     public Analizadorlexico_lotkavolterra(String fuente) {
         this.fuente = fuente;
     }
 
-    public void iniciarProceso() throws Exception{
+    private void iniciarProceso() throws Exception {
         caracter = fuente.charAt(posicion);
+        //System.out.println(caracter);
         switch (estado) {
-            case 0:{
-                if (caracter == ',') {
-                    nombreEstadoCero("P_COMA");
+            case 0:
+                if (caracter == ';') {
+                    nombreEstadosCero("P-COMA");
                 } else if (caracter == '(') {
-                    nombreEstadoCero("PARENTESIS_A");
+                    nombreEstadosCero("PARENTESIS_A");
                 } else if (caracter == ')') {
-                    nombreEstadoCero("PARENTESIS_B");
+                    nombreEstadosCero("PARENTESIS_C");
                 } else if (caracter == '=') {
-                    nombreEstadoCero("ASIGNACION");
+                    nombreEstadosCero("ASIGNACION");
                 } else if (caracter == '*') {
-                    nombreEstadoCero("MULTIPLICACION");
+                    nombreEstadosCero("MULTIPLICACION");
                 } else if (caracter == '-') {
-                    nombreEstadoCero("RESTA");
+                    nombreEstadosCero("RESTA");
                 } else if (caracter == '+') {
-                    nombreEstadoCero("SUMA");
-                } else if (caracter == 'D' || caracter == 'x' || caracter == 'y') {
+                    nombreEstadosCero("SUMA");
+                } else if (caracter == ',') {
+                    nombreEstadosCero("COMA");
+                } // else if (caracter == 'D' || caracter == 'x' || caracter == 'y') {
+                //   estado = 1;
+                // lexema += Character.toString(caracter);
+                //        } 
+                else if(Character.isLetter(caracter)) {
                     estado = 1;
                     lexema += Character.toString(caracter);
+                }
+                else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
+
                 } else if (Character.isDigit(caracter)) {
                     estado = 2;
                     lexema += Character.toString(caracter);
-                } else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
-
                 } else {
-           
-                   System.out.println("Error"+ caracter.toString());
-                   throw new ExceptionError("Desconocido: " +caracter);
+                    estadoError = true;
+                    System.out.println("Error No se encuentra caracter"+caracter.toString());
+                    throw new ExceptionError("Token desconocido : " + caracter);
+                }
+                break;
+            case 1:
+                if (caracter == ';') {
+                    nombresEstados("DERIVADA", "P-COMA");
+                    estado = 0;
+                } else if (caracter == '(') {
+                    nombresEstados("DERIVADA", "PARENTESIS_A");
+                    estado = 0;
+                } else if (caracter == ')') {
+                    nombresEstados("DERIVADA", "PARENTESIS_C");
+                    estado = 0;
+                    listaTokens.add(lexema);
+                } else if (caracter == '=') {
+                    nombresEstados("DERIVADA", "ASIGNACION");
+                    estado = 0;
+                } else if (caracter == '*') {
+                    nombresEstados("DERIVADA", "MULTIPLICACION");
+                    estado = 0;
+                } else if (caracter == '-') {
+                    nombresEstados("DERIVADA", "RESTA");
+                    estado = 0;
+                } else if (caracter == '+') {
+                    nombresEstados("DERIVADA", "SUMA");
+                    estado = 0;
+                } else if (caracter == ',') {
+                    nombresEstados("DERIVADA", "COMA");
+                    estado = 0;
+                }//else if (caracter == 'D' || caracter == 'x' || caracter == 'y') {
+                //7  lexema += Character.toString(caracter);
+                else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
+                    if (preservada.contains(lexema)) {
+                        listaTokens.add("DERIVADA");
+                        listaLexema.add(lexema);
+                        estado = 0;
+                        lexema = "";
+                    } else if (preservada1.contains(lexema)) {
+                        listaTokens.add("DERIVADA");
+                        listaLexema.add(lexema);
+                        estado = 0;
+                        lexema = "";
+                    } else {
+                        listaLexema.add(lexema);
+                        listaTokens.add("VARIABLE");
+                        estado = 0;
+                        lexema = "";
+                    }
+                }
+                  else if(Character.isLetter(caracter)) {
+                    estado = 1;
+                    lexema += Character.toString(caracter);
+                }
+                break;
+            case 2:
+                if (caracter == ';') {
+                    nombresEstados("NUMERO", "P-COMA");
+                    estado = 0;
+                } else if (caracter == '(') {
+                    nombresEstados("NUMERO", "PARENTESIS_A");
+                    estado = 0;
+                } else if (caracter == ')') {
+                    nombresEstados("NUMERO", "PARENTESIS_C");
+                    estado = 0;
+                } else if (caracter == '=') {
+                    nombresEstados("NUMERO", "ASIGNACION");
+                    estado = 0;
+                } else if (caracter == '*') {
+                    nombresEstados("NUMERO", "MULTIPLICACION");
+                    estado = 0;
+                } else if (caracter == '-') {
+                    nombresEstados("NUMERO", "RESTA");
+                    estado = 0;
+                } else if (caracter == '+') {
+                    nombresEstados("NUMERO", "SUMA");
+                    estado = 0;
+                } else if (caracter == ',') {
+                    nombresEstados("NUMERO", "COMA");
+                    estado = 0;
                     
                 }
-                break;
-            }
-            case 1:{
-                if (caracter == ';') {
-                    nombresEstados("DERIVADA ", " P_COMA");}
-                else if(caracter == ';'){
-                     nombresEstados("DERIVADA ", " P_COMA");                  
-                } else if (caracter == '(') {
-                    nombresEstados("DERIVADA ", " PARENTESIS_A");
-                } else if (caracter == ')') {
-                    nombresEstados("DERIVADA ", " PARENTESIS_C");
-                } else if (caracter == '=') {
-                    nombresEstados("DERIVADA ", " ASIGNACION");
-                } else if (caracter == '*') {
-                    nombresEstados("DERIVADA ", " MULTIPLICACION");
-                } else if (caracter == '-') {
-                    nombresEstados("DERIVADA ", " RESTA");
-                } else if (caracter == '+') {
-                    nombresEstados("DERIVADA ", " SUMA");
-                } else if (caracter == 'D' || caracter == 'x' || caracter == 'y') {
+                  else if(Character.isLetter(caracter)) {
+                    estado = 1;
+                    lexema += Character.toString(caracter);
+                }
+                else if (Character.isDigit(caracter)) {
                     lexema += Character.toString(caracter);
                 } else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
-                    listaLexema.add(lexema);
-                    listaTokens.add("DERIVADA");
-                    estado = 0;
-                    lexema = "";                  
-                } 
-                else if(caracter == ':' ){
-                    //System.out.println("ERROR");
-                    throw new ExceptionError("Caracter desconocido "+caracter);
-                }
-                else {
-                         throw new ExceptionError("Desconocido: " +caracter);
-                }
-                break;
-            }
-            case 2:{
-                 if(caracter == ';'){
-                    nombresEstados("NUMERO "," P-COMA");
-                    estado = 0;
-                }else if (caracter == '('){
-                    nombresEstados("NUMERO "," PARENTESIS_A");
-                    estado = 0;
-                } else if (caracter == ')') {
-                    nombresEstados("NUMERO "," PARENTESIS_C");
-                    estado = 0;
-                } else if (caracter == '=') {
-                    nombresEstados("NUMERO "," ASIGNACION");
-                    estado = 0;
-                }else if (caracter == '*') {
-                    nombresEstados("NUMERO "," MULTIPLICACION");
-                    estado = 0 ;
-                }else if (caracter == '-') {
-                    nombresEstados("NUMERO "," RESTA");
-                    estado = 0 ;
-                }else if (caracter == '+') {
-                    nombresEstados("NUMERO "," SUMA");
-                    estado = 0 ;
-                }else if(Character.isDigit(caracter)){
-                    lexema += Character.toString(caracter);
-                }else if(caracter == '\n' || caracter == '\t' || caracter == ' '){
-                    listaLexema.add(lexema);
-                    listaTokens.add("NUMERO");
-                    estado = 0;
-                    lexema = "";
-                }else  {
-                   System.out.println("Error:  "+ caracter.toString());
-                   throw new ExceptionError("Desconocido: " +caracter);
+                     if (preservada.contains(lexema)) {
+                        listaTokens.add("DERIVADA");
+                        listaLexema.add(lexema);
+                        estado = 0;
+                        lexema = "";
+                    } else if (preservada1.contains(lexema)) {
+                        listaTokens.add("DERIVADA");
+                        listaLexema.add(lexema);
+                        estado = 0;
+                        lexema = "";
+                    } else {
+                        listaLexema.add(lexema);
+                        listaTokens.add("NUMERO");
+                        estado = 0;
+                        lexema = "";
+                    }
+//                    listaLexema.add(lexema);
+//                    listaTokens.add("NUMERO");
+//                    estado = 0;
+//                    lexema = "";
+//                } else {
+                    //  estadoError = true;
+                    // System.out.println("ERROR");
+
                 }
                 break;
-            }
-                default:break;
+            default:
+                break;
         }
         posicion++;
-        if(posicion>=fuente.length()){
+
+        if (posicion >= fuente.length()) {
             //TODO
-        }else{
-            iniciarProceso();
+        } else {
+            if (!estadoError) {
+                iniciarProceso();
+            } else {
+                System.out.println("Error");
+            }
         }
     }
 
-    private void imprimir() throws Exception{
+    private void imprimir() {
         for (int i = 0; i < listaLexema.size(); i++) {
-            System.out.println("TOKEN : " + listaTokens.get(i) + "  LEXEMA : " + listaLexema.get(i));
-
+            System.out.println("TOKEN: " + listaTokens.get(i) + " LEXEMA: " + listaLexema.get(i));
         }
     }
 
@@ -157,22 +210,22 @@ public class Analizadorlexico_lotkavolterra {
         lexema = "";
     }
 
-    private void nombreEstadoCero(String token) {
+    private void nombreEstadosCero(String ntoken) {
         lexema += Character.toString(caracter);
-        listaTokens.add(token);
+        listaTokens.add(ntoken);
         listaLexema.add(lexema);
         lexema = "";
     }
 
     public static void main(String[] args) {
         // TODO code application logic here
-        Analizadorlexico_lotkavolterra analizarVolt= new Analizadorlexico_lotkavolterra("  Dx / = 20 + 30 ");
         try {
+            Analizadorlexico_lotkavolterra analizarVolt = new Analizadorlexico_lotkavolterra(" Dy  20 ;  Dy =30  ");
             analizarVolt.iniciarProceso();
             analizarVolt.imprimir();
         } catch (Exception e) {
         }
-    
+
     }
-  
+
 }
