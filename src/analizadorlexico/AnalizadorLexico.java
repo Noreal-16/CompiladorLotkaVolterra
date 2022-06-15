@@ -157,8 +157,12 @@ public class AnalizadorLexico {
         lexema="";
     }
     public static void main(String[] args) {
-        AnalizadorLexico analizarVolt = new AnalizadorLexico("Dx = (10-25) + (25*10); Dy = (1*25) - (15*10);");
+        try {
+            AnalizadorLexico analizarVolt = new AnalizadorLexico("Dx = (10-25) + (25*10); Dy = (1*25) - (15*10);");
         analizarVolt.iniciarProceso();
         analizarVolt.imprimir();
+        } catch (Exception e) {
+        }
+        
     }
 }
