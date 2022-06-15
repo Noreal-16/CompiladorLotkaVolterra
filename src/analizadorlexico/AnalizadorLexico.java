@@ -12,7 +12,8 @@ import java.util.List;
  * @author Usuario
  */
 public class AnalizadorLexico {
-    private Boolean estadoError=false;
+
+    private Boolean estadoError = false;
     private String fuente;
     private String lexema = "";
     private Integer estado = 0;
@@ -20,46 +21,56 @@ public class AnalizadorLexico {
     private Character caracter = ' ';
     private List<String> listaTokens = new ArrayList<>();
     private List<String> listaLexema = new ArrayList<>();
-    public AnalizadorLexico(String fuente){
+    private String preservada = "Dx";
+    private String preservada1 = "Dy";
+
+    public AnalizadorLexico(String fuente) {
         this.fuente = fuente;
     }
-    private void iniciarProceso (){
+
+    private void iniciarProceso() {
         caracter = fuente.charAt(posicion);
         //System.out.println(caracter);
-        switch (estado){
+        switch (estado) {
             case 0:
-                if(caracter == ';'){
+                if (caracter == ';') {
                     nombreEstadosCero("P-COMA");
-                }else if (caracter == '('){
+                } else if (caracter == '(') {
                     nombreEstadosCero("PARENTESIS_A");
                 } else if (caracter == ')') {
                     nombreEstadosCero("PARENTESIS_C");
                 } else if (caracter == '=') {
                     nombreEstadosCero("ASIGNACION");
-                }else if (caracter == '*') {
+                } else if (caracter == '*') {
                     nombreEstadosCero("MULTIPLICACION");
-                }else if (caracter == '-') {
+                } else if (caracter == '-') {
                     nombreEstadosCero("RESTA");
-                }else if (caracter == '+') {
+                } else if (caracter == '+') {
                     nombreEstadosCero("SUMA");
-                }else if (caracter == 'D' || caracter == 'x' || caracter == 'y') {
-                    estado = 1 ;
+                } else if (caracter == 'D' || caracter == 'x' || caracter == 'y') {
+                    estado = 1;
                     lexema += Character.toString(caracter);
-                }else if(Character.isDigit(caracter)){
+                    
+                }else if(Character.isLetter(caracter))
+                {
+                    estado=1;
+                    lexema+=Character.toString(caracter);
+                }
+                else if (Character.isDigit(caracter)) {
                     estado = 2;
                     lexema += Character.toString(caracter);
-                }else if(caracter == '\n' || caracter == '\t' || caracter == ' '){
+                } else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
 
-                }else  {
+                } else {
                     estadoError = true;
                     System.out.println("Error No se encuentra caracter");
                 }
                 break;
             case 1:
-                if(caracter == ';'){
+                if (caracter == ';') {
                     nombresEstados("DERIVADA", "P-COMA");
                     estado = 0;
-                }else if (caracter == '('){
+                } else if (caracter == '(') {
                     nombresEstados("DERIVADA", "PARENTESIS_A");
                     estado = 0;
                 } else if (caracter == ')') {
@@ -69,32 +80,50 @@ public class AnalizadorLexico {
                 } else if (caracter == '=') {
                     nombresEstados("DERIVADA", "ASIGNACION");
                     estado = 0;
-                }else if (caracter == '*') {
+                } else if (caracter == '*') {
                     nombresEstados("DERIVADA", "MULTIPLICACION");
-                    estado = 0 ;
-                }else if (caracter == '-') {
-                    nombresEstados("DERIVADA", "RESTA");
-                    estado = 0 ;
-                }else if (caracter == '+') {
-                    nombresEstados("DERIVADA", "SUMA");
-                    estado = 0 ;
-                }else if (caracter == 'D' || caracter == 'x' || caracter == 'y') {
-                    lexema += Character.toString(caracter);
-                }else if(caracter == '\n' || caracter == '\t' || caracter == ' '){
-                    listaLexema.add(lexema);
-                    listaTokens.add("DERIVADA");
                     estado = 0;
-                    lexema = "";
-                }else  {
+                } else if (caracter == '-') {
+                    nombresEstados("DERIVADA", "RESTA");
+                    estado = 0;
+                } else if (caracter == '+') {
+                    nombresEstados("DERIVADA", "SUMA");
+                    estado = 0;
+                }
+                else if(Character.isLetter(caracter)) {
+                    estado = 1;
+                    lexema += Character.toString(caracter);
+                }
+               //else if (caracter == 'D' || caracter == 'x' || caracter == 'y') {
+                 //   lexema += Character.toString(caracter);
+                //}
+                else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
+                     if (preservada.contains(lexema)) {
+                        listaTokens.add("DERIVADA");
+                        listaLexema.add(lexema);
+                        estado = 0;
+                        lexema = "";
+                    } else if (preservada1.contains(lexema)) {
+                        listaTokens.add("DERIVADA");
+                        listaLexema.add(lexema);
+                        estado = 0;
+                        lexema = "";
+                    } else {
+                        listaLexema.add(lexema);
+                        listaTokens.add("VARIABLE");
+                        estado = 0;
+                        lexema = "";
+                    }
+                } else {
                     estadoError = true;
                     System.out.println("ERROR");
                 }
                 break;
             case 2:
-                if(caracter == ';'){
+                if (caracter == ';') {
                     nombresEstados("NUMERO", "P-COMA");
                     estado = 0;
-                }else if (caracter == '('){
+                } else if (caracter == '(') {
                     nombresEstados("NUMERO", "PARENTESIS_A");
                     estado = 0;
                 } else if (caracter == ')') {
@@ -103,66 +132,83 @@ public class AnalizadorLexico {
                 } else if (caracter == '=') {
                     nombresEstados("NUMERO", "ASIGNACION");
                     estado = 0;
-                }else if (caracter == '*') {
+                } else if (caracter == '*') {
                     nombresEstados("NUMERO", "MULTIPLICACION");
-                    estado = 0 ;
-                }else if (caracter == '-') {
-                    nombresEstados("NUMERO", "RESTA");
-                    estado = 0 ;
-                }else if (caracter == '+') {
-                    nombresEstados("NUMERO", "SUMA");
-                    estado = 0 ;
-                }else if(Character.isDigit(caracter)){
-                    lexema += Character.toString(caracter);
-                }else if(caracter == '\n' || caracter == '\t' || caracter == ' '){
-                    listaLexema.add(lexema);
-                    listaTokens.add("NUMERO");
                     estado = 0;
-                    lexema = "";
-                }else  {
+                } else if (caracter == '-') {
+                    nombresEstados("NUMERO", "RESTA");
+                    estado = 0;
+                } else if (caracter == '+') {
+                    nombresEstados("NUMERO", "SUMA");
+                    estado = 0;
+                } else if (Character.isDigit(caracter)) {
+                    lexema += Character.toString(caracter);
+                } else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
+                      if (preservada.contains(lexema)) {
+                        listaTokens.add("DERIVADA");
+                        listaLexema.add(lexema);
+                        estado = 0;
+                        lexema = "";
+                    } else if (preservada1.contains(lexema)) {
+                        listaTokens.add("DERIVADA");
+                        listaLexema.add(lexema);
+                        estado = 0;
+                        lexema = "";
+                    } else {
+                        listaLexema.add(lexema);
+                        listaTokens.add("NUMERO");
+                        estado = 0;
+                        lexema = "";
+                    }
+                } else {
                     estadoError = true;
                     System.out.println("ERROR");
                 }
                 break;
-            default: break;
+            default:
+                break;
         }
         posicion++;
 
-        if (posicion >= fuente.length()){
+        if (posicion >= fuente.length()) {
             //TODO
-        }else{
-            if (!estadoError){
+        } else {
+            if (!estadoError) {
                 iniciarProceso();
-            }else {
+            } else {
                 System.out.println("Error");
             }
         }
     }
-    private void imprimir(){
-        for (int i = 0 ; i<listaLexema.size(); i++){
+
+    private void imprimir() {
+        for (int i = 0; i < listaLexema.size(); i++) {
             System.out.println("TOKEN: " + listaTokens.get(i) + " LEXEMA: " + listaLexema.get(i));
         }
     }
-    private void nombresEstados(String nToken, String nLexema){
+
+    private void nombresEstados(String nToken, String nLexema) {
         listaTokens.add(nToken);
         listaLexema.add(lexema);
         listaTokens.add(nLexema);
         listaLexema.add(caracter.toString());
-        lexema="";
+        lexema = "";
     }
-    private void nombreEstadosCero(String ntoken){
+
+    private void nombreEstadosCero(String ntoken) {
         lexema += Character.toString(caracter);
         listaTokens.add(ntoken);
         listaLexema.add(lexema);
-        lexema="";
+        lexema = "";
     }
+
     public static void main(String[] args) {
         try {
             AnalizadorLexico analizarVolt = new AnalizadorLexico("Dx = (10-25) + (25*10); Dy = (1*25) - (15*10);");
-        analizarVolt.iniciarProceso();
-        analizarVolt.imprimir();
+            analizarVolt.iniciarProceso();
+            analizarVolt.imprimir();
         } catch (Exception e) {
         }
-        
+
     }
 }
