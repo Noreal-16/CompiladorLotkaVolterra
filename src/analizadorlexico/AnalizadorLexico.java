@@ -98,12 +98,7 @@ public class AnalizadorLexico {
                  //   lexema += Character.toString(caracter);
                 //}
                 else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
-                     if (preservada.contains(lexema)) {
-                        listaTokens.add("DERIVADA");
-                        listaLexema.add(lexema);
-                        estado = 0;
-                        lexema = "";
-                    } else if (preservada1.contains(lexema)) {
+                     if (preservada.contains(lexema) || preservada1.contains(lexema)) {
                         listaTokens.add("DERIVADA");
                         listaLexema.add(lexema);
                         estado = 0;
