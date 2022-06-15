@@ -30,7 +30,6 @@ public class AnalizadorLexico {
 
     private void iniciarProceso() throws Exception {
         caracter = fuente.charAt(posicion);
-        //System.out.println(caracter);
         switch (estado) {
             case 0:
                 if (caracter == ';') {
@@ -63,8 +62,7 @@ public class AnalizadorLexico {
 
                 } else {
                     estadoError = true;
-                    System.out.println("Error!! El siguiente caracter es desconocido "+ caracter.toString());
-                   throw new ExceptionError("Token desconocido " +caracter.toString());
+                   throw new ExceptionError("Token desconocido " + caracter.toString());
                 }
                 break;
             case 1:
@@ -95,9 +93,6 @@ public class AnalizadorLexico {
                     estado = 1;
                     lexema += Character.toString(caracter);
                 }
-               //else if (caracter == 'D' || caracter == 'x' || caracter == 'y') {
-                 //   lexema += Character.toString(caracter);
-                //}
                 else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
                      if (preservada.contains(lexema) || preservada1.contains(lexema)) {
                         listaTokens.add("DERIVADA");
@@ -112,7 +107,6 @@ public class AnalizadorLexico {
                     }
                 } else {
                     estadoError = true;
-                    System.out.println("Error!! El siguiente caracter es desconocido "+ caracter.toString());
                    throw new ExceptionError("Token desconocido " +caracter.toString());
                 }
                 break;
@@ -138,15 +132,9 @@ public class AnalizadorLexico {
                 } else if (caracter == '+') {
                     nombresEstados("NUMERO", "SUMA");
                     estado = 0;
-                }else if (caracter == ',') {
-                    lexema += Character.toString(caracter);
-                    System.out.println("aqui8"+caracter.toString());
-                    nombresEstados("DECIMAL","DECIMAL");
-                } 
-                else if (Character.isDigit(caracter)) {
+                } else if (Character.isDigit(caracter) || caracter == ',') {
                     lexema += Character.toString(caracter);
                 } else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
-                      
                         listaLexema.add(lexema);
                         listaTokens.add("NUMERO");
                         estado = 0;
@@ -154,8 +142,7 @@ public class AnalizadorLexico {
                     
                 } else {
                     estadoError = true;
-                    System.out.println("Error!! El siguiente caracter es desconocido "+ caracter.toString());
-                   throw new ExceptionError("Token desconocido " +caracter.toString());
+                   throw new ExceptionError("Token desconocido " + caracter.toString());
                 }
                 break;
             default:
@@ -197,13 +184,11 @@ public class AnalizadorLexico {
 
     public static void main(String[] args) {
         try {
-            AnalizadorLexico analizarVolt = new AnalizadorLexico("Dx = (10-25) : + (25*10); Dy = (1*25) - (15*10);");
+            AnalizadorLexico analizarVolt = new AnalizadorLexico("Dx = (10-25)  + (2,5*10); Dy = (1*25) - (15*-10);");
             analizarVolt.iniciarProceso();
             analizarVolt.imprimir();
         } catch (Exception e) {
-                        System.out.println("ERROR CARACTER DESCONOCIDO");
-
-            
+            System.out.println(e);
         }
 
     }
