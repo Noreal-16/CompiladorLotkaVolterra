@@ -139,22 +139,12 @@ public class AnalizadorLexico {
                 } else if (Character.isDigit(caracter)) {
                     lexema += Character.toString(caracter);
                 } else if (caracter == '\n' || caracter == '\t' || caracter == ' ') {
-                      if (preservada.contains(lexema)) {
-                        listaTokens.add("DERIVADA");
-                        listaLexema.add(lexema);
-                        estado = 0;
-                        lexema = "";
-                    } else if (preservada1.contains(lexema)) {
-                        listaTokens.add("DERIVADA");
-                        listaLexema.add(lexema);
-                        estado = 0;
-                        lexema = "";
-                    } else {
+                      
                         listaLexema.add(lexema);
                         listaTokens.add("NUMERO");
                         estado = 0;
                         lexema = "";
-                    }
+                    
                 } else {
                     estadoError = true;
                     System.out.println("ERROR");
