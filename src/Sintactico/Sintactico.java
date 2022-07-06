@@ -1,5 +1,6 @@
 package Sintactico;
 
+
 import AnalizadorSintactico.LexerCup;
 import AnalizadorSintactico.Sintax;
 import java_cup.Lexer;
@@ -14,13 +15,12 @@ import java.io.StringReader;
 public class Sintactico {
     public static String URL = "datos"+ File.separatorChar;
 
-    public static void main(String[] args) {
-
+    public void GeneradorLexer(){
         /**
          * Generador de Sym, Sintex, LexerCup
          */
 
-        /*String [] rutas = {URL+"Lexer.flex"};
+        String [] rutas = {URL+"Lexer.flex"};
         String [] rutasS = {"-parser","Sintax",URL+"sintax.cup"};
         try {
             java_cup.Main.main(rutasS);
@@ -34,30 +34,31 @@ public class Sintactico {
             throw new RuntimeException(e);
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }*/
+        }
+    }
+    public static void main(String[] args) {
+
+        //new Sintactico().GeneradorLexer();
 
         //ENTERO a; \n ENTERO b =45; \n ENTERO imprimir (){ENTERO c = 56; PRINT ()};
 
         /**
          * Analizador Sintactico
          */
-
-        String cadena = "Dx  alex \n b \n c";
+       String cadena = " alex \n b \n c 1";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
-
-            //s.scan();
-            //System.out.println(aux);
             generateTable.imprimirLista();
         }catch (Exception e){
+            generateTable.imprimirLista();
             System.out.println("Hay un ERROR " + e);
             Symbol sym = s.getS();
             if(sym != null){
                 System.out.println("Error Syntactico en la linea " + (sym.right + 1) + " Columna " +  (sym.left + 1) + " Texto " + (sym.value));
             }
-
         }
+
     }
 }

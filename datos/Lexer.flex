@@ -8,7 +8,7 @@ import java_cup.runtime.Symbol;
 %full
 %line
 %char
-L=[a-zA-Z]+
+L=[a-zA-Z]+[_]?[a-zA-Z0-9]*
 D=[0-9]+
 espacio=[ ,\t,\r,\n]+
 %{
@@ -22,20 +22,48 @@ espacio=[ ,\t,\r,\n]+
 %%
 {espacio} {/*Ignore*/}
 ("//"(.)*) {/*Ignore*/}
-("Dx | Dy") {return new Symbol(sym.P_RESERVADA, yychar, yyline, yytext());}
-("=") {
-          generateTable.addArrayList("IGUAL");
+("Dx" | "Dy") {
+          generateTable.addArrayList("P_RESERVADA");
           generateTable.addArrayList1(yytext());
           generateTable.addArrayList2(yyline + 1);
           generateTable.addArrayList3(yycolumn  + 1);
-          return new Symbol(sym.IGUAL, yychar, yyline, yytext());
+          return new Symbol(sym.P_RESERVADA, yychar, yyline, yytext());
       }
-("{") {return new Symbol(sym.LLAVE_A, yychar, yyline, yytext());}
-("}") {return new Symbol(sym.LLAVE_C, yychar, yyline, yytext());}
-("(") {return new Symbol(sym.PARENTESIS_A, yychar, yyline, yytext());}
-(")") {return new Symbol(sym.PARENTESIS_C, yychar, yyline, yytext());}
-("+" | "-" | "*" | "/" | "%") {return new Symbol(sym.ARITMETICOS, yychar, yyline, yytext());}
-(";") {return new Symbol(sym.P_COMA, yychar, yyline, yytext());}
+("=") {
+          generateTable.addArrayList("ASIGNACION");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.ASIGNACION, yychar, yyline, yytext());
+      }
+("(") {
+          generateTable.addArrayList("PARENTESIS_A");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.PARENTESIS_A, yychar, yyline, yytext());
+      }
+(")") {
+          generateTable.addArrayList("PARENTESIS_C");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.PARENTESIS_C, yychar, yyline, yytext());
+      }
+("+" | "-" | "*" | "/" ) {
+          generateTable.addArrayList("ARITMETICOS");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.ARITMETICOS, yychar, yyline, yytext());
+      }
+(";") {
+          generateTable.addArrayList("P_COMA");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.P_COMA, yychar, yyline, yytext());
+      }
 {L}+ {
           generateTable.addArrayList("NOMBRE");
           generateTable.addArrayList1(yytext());
@@ -50,4 +78,10 @@ espacio=[ ,\t,\r,\n]+
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.DIGITO, yychar, yyline, yytext());
       }
- . {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
+ . {
+          generateTable.addArrayList("ERROR");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.ERROR, yychar, yyline, yytext());
+      }
