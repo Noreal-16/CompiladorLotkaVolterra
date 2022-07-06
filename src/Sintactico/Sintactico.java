@@ -45,7 +45,7 @@ public class Sintactico {
         /**
          * Analizador Sintactico
          */
-       String cadena = " alex \n b \n c 1";
+       String cadena = " alex \n b \n c ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
         Sintax s = new Sintax(lexerCup);
         try {

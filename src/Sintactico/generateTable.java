@@ -57,8 +57,7 @@ public class generateTable {
     }
     public static void imprimirLista(){
         for (int i = 0 ; i< generateTable.lista.size(); i++){
-            System.out.println(generateTable.lista.get(i) + "\t" + generateTable.lista1.get(i) + "\t"
-                    +generateTable.lista2.get(i) + "\t" + generateTable.lista3.get(i) + "\t"  + "imprimio" );
+            System.out.println(generateTable.lista.get(i) + " | \t" + generateTable.lista1.get(i) + " | \t");
         }
     }
 }
