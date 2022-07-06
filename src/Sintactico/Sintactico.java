@@ -2,6 +2,7 @@ package Sintactico;
 
 import AnalizadorSintactico.LexerCup;
 import AnalizadorSintactico.Sintax;
+import java_cup.Lexer;
 import java_cup.internal_error;
 import java_cup.runtime.Symbol;
 import jflex.SilentExit;
@@ -14,9 +15,11 @@ public class Sintactico {
     public static String URL = "datos"+ File.separatorChar;
 
     public static void main(String[] args) {
+
         /**
          * Generador de Sym, Sintex, LexerCup
          */
+
         /*String [] rutas = {URL+"Lexer.flex"};
         String [] rutasS = {"-parser","Sintax",URL+"sintax.cup"};
         try {
@@ -39,24 +42,15 @@ public class Sintactico {
          * Analizador Sintactico
          */
 
-        String cadena = "alex \n b \n c";
+        String cadena = "Dx  alex \n b \n c";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
-            /*Symbol aux = s.scan();
-            while (aux != null){
-                System.out.println(aux);
-                aux = s.scan();
-                if (aux.sym == 0){
-                    //System.out.println("Error en dato " + aux.value);
-                    break;
-                }else if(aux.sym == 11){
-                    System.out.println("Error en dato " + aux.value);
-                    break;
-                }
-            }*/
-           // s.scan();
+
+            //s.scan();
+            //System.out.println(aux);
+            generateTable.imprimirLista();
         }catch (Exception e){
             System.out.println("Hay un ERROR " + e);
             Symbol sym = s.getS();

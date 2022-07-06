@@ -629,11 +629,19 @@ public class LexerCup implements java_cup.runtime.Scanner {
             }
           case 13: break;
           case 2: 
-            { return new Symbol(sym.NOMBRE, yychar, yyline, yytext());
+            { generateTable.addArrayList("NOMBRE");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+         generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.NOMBRE, yychar, yyline, yytext());
             }
           case 14: break;
           case 3: 
-            { return new Symbol(sym.DIGITO, yychar, yyline, yytext());
+            { generateTable.addArrayList("DIGITO");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.DIGITO, yychar, yyline, yytext());
             }
           case 15: break;
           case 4: 
@@ -645,7 +653,11 @@ public class LexerCup implements java_cup.runtime.Scanner {
             }
           case 17: break;
           case 6: 
-            { return new Symbol(sym.IGUAL, yychar, yyline, yytext());
+            { generateTable.addArrayList("IGUAL");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.IGUAL, yychar, yyline, yytext());
             }
           case 18: break;
           case 7: 

@@ -23,13 +23,31 @@ espacio=[ ,\t,\r,\n]+
 {espacio} {/*Ignore*/}
 ("//"(.)*) {/*Ignore*/}
 ("Dx | Dy") {return new Symbol(sym.P_RESERVADA, yychar, yyline, yytext());}
-("=") {return new Symbol(sym.IGUAL, yychar, yyline, yytext());}
+("=") {
+          generateTable.addArrayList("IGUAL");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.IGUAL, yychar, yyline, yytext());
+      }
 ("{") {return new Symbol(sym.LLAVE_A, yychar, yyline, yytext());}
 ("}") {return new Symbol(sym.LLAVE_C, yychar, yyline, yytext());}
 ("(") {return new Symbol(sym.PARENTESIS_A, yychar, yyline, yytext());}
 (")") {return new Symbol(sym.PARENTESIS_C, yychar, yyline, yytext());}
 ("+" | "-" | "*" | "/" | "%") {return new Symbol(sym.ARITMETICOS, yychar, yyline, yytext());}
 (";") {return new Symbol(sym.P_COMA, yychar, yyline, yytext());}
-{L}+ {return new Symbol(sym.NOMBRE, yychar, yyline, yytext());}
-{D}+ {return new Symbol(sym.DIGITO, yychar, yyline, yytext());}
+{L}+ {
+          generateTable.addArrayList("NOMBRE");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+         generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.NOMBRE, yychar, yyline, yytext());
+      }
+{D}+ {
+          generateTable.addArrayList("DIGITO");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.DIGITO, yychar, yyline, yytext());
+      }
  . {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
