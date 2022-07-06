@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="ant-1.7.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/ant-1.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/ant-launcher-1.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/java-cup-11a.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/java_cup.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jflex-1.6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
