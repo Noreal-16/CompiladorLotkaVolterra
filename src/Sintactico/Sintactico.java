@@ -68,7 +68,7 @@ public class Sintactico {
         /**
          * Analizador Sintactico
          */
-       String cadena = " alex \n b \n c ";
+       String cadena = "Dx = 12 * (A - B*y);";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
         Sintax s = new Sintax(lexerCup);
         try {

@@ -630,7 +630,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           case 11: break;
           case 2: 
             { generateTable.addArrayList("NOMBRE");
-          generateTable.addArrayList1(yytext());
+                generateTable.addArrayList1(yytext());
           generateTable.addArrayList2(yyline + 1);
          generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.NOMBRE, yychar, yyline, yytext());
