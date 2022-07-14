@@ -11,6 +11,9 @@ import jflex.SilentExit;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Sintactico {
     public static String URL = "datos"+ File.separatorChar;
@@ -26,7 +29,7 @@ public class Sintactico {
             java_cup.Main.main(rutasS);
             jflex.Main.generate(rutas);
             ///////////////////////////////
-             Path sym = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src"+File.separatorChar + "AnalizadorSintactico"
+            Path sym = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src"+File.separatorChar + "AnalizadorSintactico"
             + File.separatorChar + "sym.java");
             Path sintax = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src"+File.separatorChar + "AnalizadorSintactico"
             + File.separatorChar + "Sintax.java");
@@ -43,7 +46,7 @@ public class Sintactico {
              */
             Files.move(Paths.get(System.getProperty("user.dir") + File.separatorChar + "sym.java"), sym);
             Files.move(Paths.get(System.getProperty("user.dir") + File.separatorChar + "Sintax.java"), sintax);
-
+            Files.move(Paths.get(URL+"LexerCup.java"),lexer);
             
         } catch (SilentExit e) {
             System.out.println("ERROR" + e);
@@ -58,7 +61,7 @@ public class Sintactico {
     }
     public static void main(String[] args) {
        
-        GeneradorLexer();
+        //GeneradorLexer();
 
         //ENTERO a; \n ENTERO b =45; \n ENTERO imprimir (){ENTERO c = 56; PRINT ()};
 
