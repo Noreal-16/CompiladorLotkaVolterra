@@ -15,7 +15,7 @@ import java.io.StringReader;
 public class Sintactico {
     public static String URL = "datos"+ File.separatorChar;
 
-    public void GeneradorLexer(){
+    public static void GeneradorLexer(){
         /**
          * Generador de Sym, Sintex, LexerCup
          */
@@ -25,6 +25,26 @@ public class Sintactico {
         try {
             java_cup.Main.main(rutasS);
             jflex.Main.generate(rutas);
+            ///////////////////////////////
+             Path sym = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src"+File.separatorChar + "AnalizadorSintactico"
+            + File.separatorChar + "sym.java");
+            Path sintax = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src"+File.separatorChar + "AnalizadorSintactico"
+            + File.separatorChar + "Sintax.java");
+            Path lexer = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src"+File.separatorChar + "AnalizadorSintactico"
+            + File.separatorChar + "LexerCup.java");
+            /*
+            Eliminar archivos
+             */
+            eliminar(sym);
+            eliminar(sintax);
+            eliminar(lexer);
+            /**
+             * Mover Archivos
+             */
+            Files.move(Paths.get(System.getProperty("user.dir") + File.separatorChar + "sym.java"), sym);
+            Files.move(Paths.get(System.getProperty("user.dir") + File.separatorChar + "Sintax.java"), sintax);
+
+            
         } catch (SilentExit e) {
             System.out.println("ERROR" + e);
             //throw new RuntimeException(e);
@@ -37,8 +57,8 @@ public class Sintactico {
         }
     }
     public static void main(String[] args) {
-
-        //new Sintactico().GeneradorLexer();
+       
+        GeneradorLexer();
 
         //ENTERO a; \n ENTERO b =45; \n ENTERO imprimir (){ENTERO c = 56; PRINT ()};
 
@@ -60,5 +80,15 @@ public class Sintactico {
             }
         }
 
+    }
+    
+    private static void eliminar(Path ruta){
+        try {
+            if (Files.exists(ruta)){
+                Files.delete(ruta);
+            }
+        }catch (Exception e){
+
+        }
     }
 }
