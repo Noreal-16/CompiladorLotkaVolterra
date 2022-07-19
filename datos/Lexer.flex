@@ -1,9 +1,10 @@
 package AnalizadorSintactico;
 import java_cup.runtime.Symbol;
+import Sintactico.generateTable;
 %%
 %public
 %class LexerCup
-%type java_cup.runtine.Symbol
+%type java_cup.runtime.Symbol
 %cup
 %full
 %line
