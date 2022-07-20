@@ -67,8 +67,11 @@ public class Sintactico {
 
         /**
          * Analizador Sintactico
+         * ECUACIONES
+         *   Dx = Ax-Bxy;
+         *   Dy = -Cy + Dxy || Dy = Dxy - Cy;
          */
-       String cadena = " a = 12; \n b = 13; \n Dx = 12 * ( 6 - 444 * y ) ; h = 12  * ( A - 23 * y4) ; \n  a = A - 23 * y4 ;  Dx = (a - b); ";
+        String cadena = "Dx = (A*x)-(B*x*y); \n Dy = -C*y + (D*x*y); \n Dy = (D*x*y) - (C*y); ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
 
         Sintax s = new Sintax(lexerCup);
