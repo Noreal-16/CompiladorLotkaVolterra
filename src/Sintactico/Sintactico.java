@@ -75,6 +75,7 @@ public class Sintactico {
         String cadena = "  Dx = (A*x)-(B*x*y); \n Dy = -C*y + (D*x*y); \n Dy = (D*x*y) - (C*y); ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
 
+
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
