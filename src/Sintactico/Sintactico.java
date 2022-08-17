@@ -74,7 +74,7 @@ public class Sintactico {
          */
         String cadena = " a = 12; b=13; c = 12; d = 5; Dx = 12 * 5 - 12*8*9; PRINT Dx; ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
-
+//
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
