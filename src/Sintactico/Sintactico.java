@@ -72,16 +72,17 @@ public class Sintactico {
          *   Dy = -Cy + Dxy || Dy = Dxy - Cy;
          *
          */
-        String cadena = "  Dx = (A*x)-(B*x*y); \n Dy = -C*y + (D*x*y); \n Dy = (D*x*y) - (C*y); ";
+        String cadena = " a = 12; b=13; c = 12; d = 5; Dx = 12 * 5 - 12*8*9; PRINT Dx; ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
 
 
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
-            generateTable.imprimirLista();
+            //generateTable.imprimirLista();
+            Utilidades.validarEntradas();
         }catch (Exception e){
-            generateTable.imprimirLista();
+            //generateTable.imprimirLista();
             System.out.println("Hay un ERROR " + e);
             Symbol sym = s.getS();
             if(sym != null){

@@ -24,6 +24,13 @@ espacio=[ ,\t,\r,\n]+
 {espacio} {/*Ignore*/}
 ("//"(.)*) {/*Ignore*/}
 ("Dx" | "Dy") {
+          generateTable.addArrayList("DERIVADA");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.DERIVADA, yychar, yyline, yytext());
+      }
+("PRINT") {
           generateTable.addArrayList("P_RESERVADA");
           generateTable.addArrayList1(yytext());
           generateTable.addArrayList2(yyline + 1);
@@ -64,6 +71,13 @@ espacio=[ ,\t,\r,\n]+
           generateTable.addArrayList2(yyline + 1);
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.P_COMA, yychar, yyline, yytext());
+      }
+("AND") {
+          generateTable.addArrayList("CONCATENADOR");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.CONCATENADOR, yychar, yyline, yytext());
       }
 {L}+ {
           generateTable.addArrayList("NOMBRE");
