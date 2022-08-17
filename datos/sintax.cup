@@ -49,8 +49,30 @@ Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
               PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C |
               ARITMETICOS VALOR ARITMETICOS VALOR ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
               PARENTESIS_A ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
-              PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C |
-              VALOR ARITMETICOS VALOR ARITMETICOS VALOR ARITMETICOS  VALOR ARITMETICOS VALOR;
+              PARENTESIS_A VALOR:valor_a ARITMETICOS:tipo1 VALOR:valor_b ARITMETICOS:tipo2 VALOR:valor_c PARENTESIS_C ARITMETICOS:tipo3 PARENTESIS_A VALOR:valor_d ARITMETICOS:tipo4 VALOR:valor_e PARENTESIS_C {:
+Integer num1 = Integer.parseInt(valor_a.toString());
+Integer num2 = Integer.parseInt(valor_b.toString());
+Integer num3 = Integer.parseInt(valor_c.toString());
+Integer num4 = Integer.parseInt(valor_d.toString());
+Integer num5 = Integer.parseInt(valor_e.toString());
+Character t1= tipo1.toString().charAt(0);
+Character t2= tipo2.toString().charAt(0);
+Character t3= tipo3.toString().charAt(0);
+Character t4= tipo4.toString().charAt(0);
+Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
+:}|
+              VALOR:valor_a ARITMETICOS:tipo1 VALOR:valor_b ARITMETICOS:tipo2 VALOR:valor_c ARITMETICOS:tipo3 VALOR:valor_d ARITMETICOS:tipo4 VALOR:valor_e {:
+Integer num1 = Integer.parseInt(valor_a.toString());
+Integer num2 = Integer.parseInt(valor_b.toString());
+Integer num3 = Integer.parseInt(valor_c.toString());
+Integer num4 = Integer.parseInt(valor_d.toString());
+Integer num5 = Integer.parseInt(valor_e.toString());
+Character t1= tipo1.toString().charAt(0);
+Character t2= tipo2.toString().charAt(0);
+Character t3= tipo3.toString().charAt(0);
+Character t4= tipo4.toString().charAt(0);
+Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
+:};
 
 PARENTESIS::=PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C;
 VALOR ::= DIGITO | NOMBRE;
