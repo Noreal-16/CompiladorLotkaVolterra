@@ -62,7 +62,23 @@ Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
               :} 
 |
               PARENTESIS_A VALOR:a ARITMETICOS:tipo1 VALOR:b PARENTESIS_C ARITMETICOS:tipo2 PARENTESIS_A VALOR:c ARITMETICOS:tipo3 VALOR:d ARITMETICOS:tipo4 VALOR:e PARENTESIS_C 
-              
+              {:
+
+                    Integer numero1 = Integer.parseInt(a.toString());
+                    Integer numero2 = Integer.parseInt(b.toString());
+                    Integer numero3 = Integer.parseInt(c.toString());
+                    Integer numero4 = Integer.parseInt(d.toString());
+                    Integer numero5 = Integer.parseInt(e.toString());
+                    Character t1 = tipo1.toString().charAt(0);
+                    Character t2 = tipo2.toString().charAt(0);
+                    Character t3 = tipo3.toString().charAt(0);
+                    Character t4 = tipo4.toString().charAt(0);
+                    Utilidades.operaciones(numero1, numero2,numero3, numero4, numero5, t1, t2, t3, t4);
+
+
+
+
+                :}
 
 |
               ARITMETICOS VALOR ARITMETICOS VALOR ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
