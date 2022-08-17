@@ -34,5 +34,17 @@ public class Utilidades {
         System.out.println("El resultado es " + res);
         return res;
     }
+    
+    public static Integer operaciones2(Integer numero1, Integer numero2, Integer numero3, Integer numero4, Integer numero5, Character t1, Character t2,Character t3,Character t4) {
+        Integer res = 0;
+        System.out.println(t1 + " "+ t2 + " "+ t3 + " "+ t4);
+        if (t1 == '*' && t2 == '-' && t3=='*' && t4=='*' ) {
+            res = numero1 * numero2 - numero3*numero4*numero5;
+        } else if (t1 == '*' && t2 == '*' && t3=='-' && t4=='*') {
+            res = numero1 * numero2 * numero3 - numero4 * numero5;
+        }
+        System.out.println("El resultado es " + res);
+        return res;
+    }
 
 }

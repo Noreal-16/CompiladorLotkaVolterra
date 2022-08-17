@@ -13,6 +13,8 @@ parser code
     }
 :};
 
+
+
 terminal ASIGNACION, PARENTESIS_A, PARENTESIS_C, ARITMETICOS, CONCATENADOR, P_COMA, NOMBRE, DIGITO, ERROR, P_RESERVADA, DERIVADA;
 non terminal INICIO, VARIABLE, SENTENCIA, DECLARACION,RESULTADO, DESARROLLO, DESARROLLO_PARENTESIS2,OPERACION, OPERACION1, VALOR,AUXOPERACION,PARENTESIS;
 INICIO ::= SENTENCIA;
@@ -45,8 +47,24 @@ Character t3= tipo3.toString().charAt(0);
 Character t4= tipo4.toString().charAt(0);
 Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
 :}|
-              PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS  VALOR ARITMETICOS VALOR ARITMETICOS VALOR |
-              PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C |
+              PARENTESIS_A VALOR:valor1 ARITMETICOS:t1 VALOR:valor2 PARENTESIS_C ARITMETICOS:t2  VALOR:valor3 ARITMETICOS:t3 VALOR:valor4 ARITMETICOS:t4 VALOR:valor5
+                {:
+                    Integer n1 = Integer.parseInt(valor1.toString());
+                    Integer n2 = Integer.parseInt(valor2.toString());
+                    Integer n3 = Integer.parseInt(valor3.toString());
+                    Integer n4 = Integer.parseInt(valor4.toString());
+                    Integer n5 = Integer.parseInt(valor5.toString());
+                    Character ta1= t1.toString().charAt(0);
+                    Character ta2= t2.toString().charAt(0);
+                    Character ta3= t3.toString().charAt(0);
+                    Character ta4= t4.toString().charAt(0);
+                    Utilidades.operaciones(n1, n2, n3, n4, n5, ta1,ta2,ta3,ta4);
+              :} 
+|
+              PARENTESIS_A VALOR:a ARITMETICOS:tipo1 VALOR:b PARENTESIS_C ARITMETICOS:tipo2 PARENTESIS_A VALOR:c ARITMETICOS:tipo3 VALOR:d ARITMETICOS:tipo4 VALOR:e PARENTESIS_C 
+              
+
+|
               ARITMETICOS VALOR ARITMETICOS VALOR ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
               PARENTESIS_A ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
               PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C |
