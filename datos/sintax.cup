@@ -47,8 +47,35 @@ Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
 :}|
               PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS  VALOR ARITMETICOS VALOR ARITMETICOS VALOR |
               PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C |
-              ARITMETICOS VALOR ARITMETICOS VALOR ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
-              PARENTESIS_A ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
+
+              ARITMETICOS:tipo VALOR:valor_1 ARITMETICOS:tipo_2 VALOR:valor_2 ARITMETICOS:tipo_3 PARENTESIS_A VALOR:valor_3 ARITMETICOS:tipo_4 VALOR:valor_4 ARITMETICOS:tipo_5 VALOR:valor_5 PARENTESIS_C
+{: 
+Integer n= Integer.parseInt(valor_1.toString());
+Integer n2= Integer.parseInt(valor_2.toString());
+Integer n3= Integer.parseInt(valor_3.toString());
+Integer n4= Integer.parseInt(valor_4.toString());
+Integer n5= Integer.parseInt(valor_5.toString());
+Character t1= tipo.toString().charAt(0);
+Character t2= tipo_2.toString().charAt(0);
+Character t3= tipo_3.toString().charAt(0);
+Character t4= tipo_4.toString().charAt(0);
+Character t5= tipo_5.toString().charAt(0);
+Utilidades.operaciones2(n,n2,n3,n4,n5,t1,t2,t3,t4,t5);
+:}|
+              PARENTESIS_A ARITMETICOS:tip VALOR:val1 ARITMETICOS:tip2 VALOR:val2 PARENTESIS_C ARITMETICOS:tip3 PARENTESIS_A VALOR:val3 ARITMETICOS:tip4 VALOR:val4 ARITMETICOS:tip5 VALOR:val5 PARENTESIS_C
+{:
+Integer n= Integer.parseInt(val1.toString());
+Integer n2= Integer.parseInt(val2.toString());
+Integer n3= Integer.parseInt(val3.toString());
+Integer n4= Integer.parseInt(val4.toString());
+Integer n5= Integer.parseInt(val5.toString());
+Character t1= tip.toString().charAt(0);
+Character t2= tip2.toString().charAt(0);
+Character t3= tip3.toString().charAt(0);
+Character t4= tip4.toString().charAt(0);
+Character t5= tip5.toString().charAt(0);
+Utilidades.operaciones2(n,n2,n3,n4,n5,t1,t2,t3,t4,t5);
+:}|
               PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C |
               VALOR ARITMETICOS VALOR ARITMETICOS VALOR ARITMETICOS  VALOR ARITMETICOS VALOR;
 

@@ -61,7 +61,7 @@ public class Sintactico {
     }
     public static void main(String[] args) {
        
-        //GeneradorLexer();
+      // GeneradorLexer();
 
         //ENTERO a; \n ENTERO b =45; \n ENTERO imprimir (){ENTERO c = 56; PRINT ()};
 
@@ -70,9 +70,10 @@ public class Sintactico {
          * ECUACIONES
          *   Dx = Ax-Bxy;
          *   Dy = -Cy + Dxy || Dy = Dxy - Cy;
-         *
+         * -2*3+ (2*3+4)
+         *(- 5*4)+(2+3*4)
          */
-        String cadena = " a = 12; b=13; c = 12; d = 5; Dx = 12 * 5 - 12*8*9; PRINT Dx; ";
+        String cadena = "  Dx = - 12 * 5 + (12*8*9); ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
 
 
