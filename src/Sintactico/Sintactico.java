@@ -61,18 +61,18 @@ public class Sintactico {
     }
     public static void main(String[] args) {
        
-        //GeneradorLexer();
+        GeneradorLexer();
 
         //ENTERO a; \n ENTERO b =45; \n ENTERO imprimir (){ENTERO c = 56; PRINT ()};
 
         /**
          * Analizador Sintactico
          * ECUACIONES
-         *   Dx = Ax-Bxy;
+         *   Dx = A*x-B*x*y;
          *   Dy = -Cy + Dxy || Dy = Dxy - Cy;
-         *
+         *  a = 12; b=13; c = 12; d = 0.5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
          */
-        String cadena = " a = 12; b=13; c = 12; d = 0.5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy; ";
+        String cadena = " a = 12; b=13; c = 12; d = 0.5; Dx = 12 * 5 - (12*8*9); PRINT Dx AND Dy; ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
 
 

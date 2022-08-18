@@ -1,6 +1,8 @@
 package AnalizadorSintactico;
 import java_cup.runtime.Symbol;
 import Sintactico.Utilidades;
+import java.util.ArrayList;
+import java.util.List;
 
 parser code
 {:
@@ -12,6 +14,11 @@ parser code
         return this.s;
     }
 :};
+action code
+{:
+    public Integer a,b,c,d,e;
+    public  List<Integer> variables =  new ArrayList<>();
+:}
 
 terminal ASIGNACION, PARENTESIS_A, PARENTESIS_C, ARITMETICOS, CONCATENADOR, P_COMA, NOMBRE, DIGITO, ERROR, P_RESERVADA, DERIVADA;
 non terminal INICIO, VARIABLE, SENTENCIA, DECLARACION,RESULTADO, DESARROLLO, DESARROLLO_PARENTESIS2,OPERACION, OPERACION1, VALOR,AUXOPERACION,PARENTESIS;
@@ -30,15 +37,22 @@ DECLARACION ::= NOMBRE:nombre ASIGNACION DIGITO:valor P_COMA
    :}| NOMBRE:nombre ASIGNACION OPERACION1:operador P_COMA{:
     Utilidades.addVarible(nombre.toString(), operador.toString());
    :};
-
+VALOR ::= DIGITO:dig {:
+System.out.println("El digito "  + dig.toString());
+a = Integer.parseInt(dig.toString());
+variables.add(a);
+:}| NOMBRE:nombre {:
+System.out.println("El nombre "  + nombre.toString());
+:};
 DESARROLLO ::= DERIVADA ASIGNACION OPERACION P_COMA| DERIVADA  ASIGNACION PARENTESIS  P_COMA  ;
-
+// Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
 OPERACION ::= VALOR:valor_a ARITMETICOS:tipo1 VALOR:valor_presa ARITMETICOS:tipo2 PARENTESIS_A VALOR:valor_c ARITMETICOS:tipo3 VALOR:valor_d ARITMETICOS:tipo4 VALOR:valor_depredador PARENTESIS_C {:
-Integer num1 = Integer.parseInt(valor_a.toString());
-Integer num2 = Integer.parseInt(valor_presa.toString());
-Integer num3 = Integer.parseInt(valor_c.toString());
-Integer num4 = Integer.parseInt(valor_d.toString());
-Integer num5 = Integer.parseInt(valor_depredador.toString());
+System.out.println("operacion " + variables.toString());
+Integer num1 = variables.get(0);
+Integer num2 = variables.get(1);
+Integer num3 = variables.get(2);
+Integer num4 = variables.get(3);
+Integer num5 = variables.get(4);
 Character t1= tipo1.toString().charAt(0);
 Character t2= tipo2.toString().charAt(0);
 Character t3= tipo3.toString().charAt(0);
@@ -53,7 +67,9 @@ Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
               VALOR ARITMETICOS VALOR ARITMETICOS VALOR ARITMETICOS  VALOR ARITMETICOS VALOR;
 
 PARENTESIS::=PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C;
-VALOR ::= DIGITO | NOMBRE;
+
 RESULTADO::=  P_RESERVADA DERIVADA:presa CONCATENADOR DERIVADA:depredador P_COMA {:
+System.out.println("Ingreso" + presa);
+System.out.println("Ingresos" + depredador);
 Utilidades.imprimirResultado(presa.toString(),depredador.toString());
 :};
