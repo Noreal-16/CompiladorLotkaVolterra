@@ -73,14 +73,14 @@ public class Sintactico {
          * -2*3+ (2*3+4)
          *(- 5*4)+(2+3*4)
          */
-        String cadena = "  Dx = - 12 * 5 + (12*8*9); ";
+        String cadena = "  Dx =  12 * 5 + (12*8*9); ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
 
 
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
-            //generateTable.imprimirLista();
+           // generateTable.imprimirLista();
             Utilidades.validarEntradas();
         }catch (Exception e){
             //generateTable.imprimirLista();
