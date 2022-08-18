@@ -13,8 +13,6 @@ parser code
     }
 :};
 
-
-
 terminal ASIGNACION, PARENTESIS_A, PARENTESIS_C, ARITMETICOS, CONCATENADOR, P_COMA, NOMBRE, DIGITO, ERROR, P_RESERVADA, DERIVADA;
 non terminal INICIO, VARIABLE, SENTENCIA, DECLARACION,RESULTADO, DESARROLLO, DESARROLLO_PARENTESIS2,OPERACION, OPERACION1, VALOR,AUXOPERACION,PARENTESIS;
 INICIO ::= SENTENCIA;
@@ -35,52 +33,44 @@ DECLARACION ::= NOMBRE:nombre ASIGNACION DIGITO:valor P_COMA
 
 DESARROLLO ::= DERIVADA ASIGNACION OPERACION P_COMA| DERIVADA  ASIGNACION PARENTESIS  P_COMA  ;
 
-OPERACION ::= VALOR:valor_a ARITMETICOS:tipo1 VALOR:valor_b ARITMETICOS:tipo2 PARENTESIS_A VALOR:valor_c ARITMETICOS:tipo3 VALOR:valor_d ARITMETICOS:tipo4 VALOR:valor_e PARENTESIS_C {:
+OPERACION ::= VALOR:valor_a ARITMETICOS:tipo1 VALOR:valor_presa ARITMETICOS:tipo2 PARENTESIS_A VALOR:valor_c ARITMETICOS:tipo3 VALOR:valor_d ARITMETICOS:tipo4 VALOR:valor_depredador PARENTESIS_C {:
 Integer num1 = Integer.parseInt(valor_a.toString());
-Integer num2 = Integer.parseInt(valor_b.toString());
+Integer num2 = Integer.parseInt(valor_presa.toString());
 Integer num3 = Integer.parseInt(valor_c.toString());
 Integer num4 = Integer.parseInt(valor_d.toString());
-Integer num5 = Integer.parseInt(valor_e.toString());
+Integer num5 = Integer.parseInt(valor_depredador.toString());
 Character t1= tipo1.toString().charAt(0);
 Character t2= tipo2.toString().charAt(0);
 Character t3= tipo3.toString().charAt(0);
 Character t4= tipo4.toString().charAt(0);
 Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
 :}|
-              PARENTESIS_A VALOR:valor1 ARITMETICOS:t1 VALOR:valor2 PARENTESIS_C ARITMETICOS:t2  VALOR:valor3 ARITMETICOS:t3 VALOR:valor4 ARITMETICOS:t4 VALOR:valor5
-                {:
-                    Integer n1 = Integer.parseInt(valor1.toString());
-                    Integer n2 = Integer.parseInt(valor2.toString());
-                    Integer n3 = Integer.parseInt(valor3.toString());
-                    Integer n4 = Integer.parseInt(valor4.toString());
-                    Integer n5 = Integer.parseInt(valor5.toString());
-                    Character ta1= t1.toString().charAt(0);
-                    Character ta2= t2.toString().charAt(0);
-                    Character ta3= t3.toString().charAt(0);
-                    Character ta4= t4.toString().charAt(0);
-                    Utilidades.operaciones(n1, n2, n3, n4, n5, ta1,ta2,ta3,ta4);
-              :} 
-|
-              PARENTESIS_A VALOR:a ARITMETICOS:tipo1 VALOR:b PARENTESIS_C ARITMETICOS:tipo2 PARENTESIS_A VALOR:c ARITMETICOS:tipo3 VALOR:d ARITMETICOS:tipo4 VALOR:e PARENTESIS_C 
-              {:
-
-                    Integer numero1 = Integer.parseInt(a.toString());
-                    Integer numero2 = Integer.parseInt(b.toString());
-                    Integer numero3 = Integer.parseInt(c.toString());
-                    Integer numero4 = Integer.parseInt(d.toString());
-                    Integer numero5 = Integer.parseInt(e.toString());
-                    Character t1 = tipo1.toString().charAt(0);
-                    Character t2 = tipo2.toString().charAt(0);
-                    Character t3 = tipo3.toString().charAt(0);
-                    Character t4 = tipo4.toString().charAt(0);
-                    Utilidades.operaciones(numero1, numero2,numero3, numero4, numero5, t1, t2, t3, t4);
-
-
-
-
-                :}
-
-|
+              PARENTESIS_A VALOR:valor_a  ARITMETICOS:tipo1 VALOR:valor_presa PARENTESIS_C ARITMETICOS:tipo2  VALOR:valor_c ARITMETICOS:tipo3 VALOR:valor_d ARITMETICOS:tipo4 VALOR:valor_depredador{:
+Integer num1 = Integer.parseInt(valor_a.toString());
+Integer num2 = Integer.parseInt(valor_presa.toString());
+Integer num3 = Integer.parseInt(valor_c.toString());
+Integer num4 = Integer.parseInt(valor_d.toString());
+Integer num5 = Integer.parseInt(valor_depredador.toString());
+Character t1= tipo1.toString().charAt(0);
+Character t2= tipo2.toString().charAt(0);
+Character t3= tipo3.toString().charAt(0);
+Character t4= tipo4.toString().charAt(0);
+Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
+:}
+ |
+              PARENTESIS_A VALOR:valor_a  ARITMETICOS:tipo1 VALOR:valor_presa PARENTESIS_C ARITMETICOS:tipo2 PARENTESIS_A VALOR:valor_c ARITMETICOS:tipo3 VALOR:valor_d ARITMETICOS:tipo4 VALOR:valor_depredador PARENTESIS_C{:
+Integer num1 = Integer.parseInt(valor_a.toString());
+Integer num2 = Integer.parseInt(valor_presa.toString());
+Integer num3 = Integer.parseInt(valor_c.toString());
+Integer num4 = Integer.parseInt(valor_d.toString());
+Integer num5 = Integer.parseInt(valor_depredador.toString());
+Character t1= tipo1.toString().charAt(0);
+Character t2= tipo2.toString().charAt(0);
+Character t3= tipo3.toString().charAt(0);
+Character t4= tipo4.toString().charAt(0);
+Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
+:}
+ |
               ARITMETICOS VALOR ARITMETICOS VALOR ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
               PARENTESIS_A ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
               PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C |
@@ -88,4 +78,6 @@ Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
 
 PARENTESIS::=PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C;
 VALOR ::= DIGITO | NOMBRE;
-RESULTADO::= P_RESERVADA DERIVADA P_COMA | P_RESERVADA DERIVADA CONCATENADOR DERIVADA P_COMA;
+RESULTADO::=  P_RESERVADA DERIVADA:presa CONCATENADOR DERIVADA:depredador P_COMA {:
+Utilidades.imprimirResultado(presa.toString(),depredador.toString());
+:};

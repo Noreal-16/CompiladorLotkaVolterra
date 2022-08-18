@@ -72,7 +72,7 @@ public class Sintactico {
          *   Dy = -Cy + Dxy || Dy = Dxy - Cy;
          *
          */
-        String cadena = " a = 12; b=13; c = 12; d = 5; Dx = 12 * 5 - 12*8*9; PRINT Dx; ";
+        String cadena = " a = 12; b=13; c = 12; d = 5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy; ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
 
 

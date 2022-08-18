@@ -23,28 +23,36 @@ public class Utilidades {
         contador++;
     }
 
-    public static Integer operaciones(Integer numero1, Integer numero2, Integer numero3, Integer numero4, Integer numero5, Character t1, Character t2,Character t3,Character t4) {
-        Integer res = 0;
-        System.out.println(t1 + " "+ t2 + " "+ t3 + " "+ t4);
-        if (t1 == '*' && t2 == '-' && t3=='*' && t4=='*' ) {
-            res = numero1 * numero2 - numero3*numero4*numero5;
-        } else if (t1 == '*' && t2 == '*' && t3=='-' && t4=='*') {
-            res = numero1 * numero2 * numero3 - numero4 * numero5;
-        }
-        System.out.println("El resultado es " + res);
-        return res;
-    }
-    
-    public static Integer operaciones2(Integer numero1, Integer numero2, Integer numero3, Integer numero4, Integer numero5, Character t1, Character t2,Character t3,Character t4) {
-        Integer res = 0;
-        System.out.println(t1 + " "+ t2 + " "+ t3 + " "+ t4);
-        if (t1 == '*' && t2 == '-' && t3=='*' && t4=='*' ) {
-            res = numero1 * numero2 - numero3*numero4*numero5;
-        } else if (t1 == '*' && t2 == '*' && t3=='-' && t4=='*') {
-            res = numero1 * numero2 * numero3 - numero4 * numero5;
-        }
-        System.out.println("El resultado es " + res);
-        return res;
-    }
+   public static List resultadoPresa = new ArrayList();
+   public static List resultadoDepredador = new ArrayList();
 
+    public static Integer operaciones(Integer numero1, Integer presa, Integer numero3, Integer depredador, Integer numero4, Character t1, Character t2, Character t3, Character t4) {
+        Integer resPresa = 0;
+        Integer derPresa = 0;
+        Integer resDepredaor = 0;
+        Integer derDepredador = 0;
+        if (t1 == '*' && t2 == '-' && t3 == '*' && t4 == '*') {
+            resPresa =(int)(numero1 * presa - numero3 * presa * depredador);
+            derPresa = (int)(presa * (numero1 - numero3* depredador ));
+            resultadoPresa.add(derPresa);
+            return derPresa;
+        } else if (t1 == '*' && t2 == '*' && t3 == '-' && t4 == '*') {
+            resDepredaor = (int)(numero1 * presa * depredador - numero4*depredador);
+            derDepredador= (int)(depredador * (numero1 *presa - numero4 ));
+            resultadoDepredador.add(derDepredador);
+            return derDepredador;
+        }
+        System.out.println("El resultado es " + derPresa);
+        return derPresa;
+    }
+    public static void imprimirResultado(String derPresa, String derDepredador){
+        for (int i = 0; i < resultadoPresa.size(); i++) {
+            derPresa = resultadoPresa.get(i).toString();
+            System.out.println("La cantidad de presas son : " + derPresa);
+        }
+        for (int i = 0; i < resultadoDepredador.size(); i++) {
+            derDepredador =resultadoDepredador.get(i).toString();
+            System.out.println("La cantidad de depredadores son : " + derDepredador);
+        }
+    }
 }
