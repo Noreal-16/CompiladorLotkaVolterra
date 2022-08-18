@@ -33,12 +33,12 @@ DECLARACION ::= NOMBRE:nombre ASIGNACION DIGITO:valor P_COMA
 
 DESARROLLO ::= DERIVADA ASIGNACION OPERACION P_COMA| DERIVADA  ASIGNACION PARENTESIS  P_COMA  ;
 
-OPERACION ::= VALOR:valor_a ARITMETICOS:tipo1 VALOR:valor_b ARITMETICOS:tipo2 PARENTESIS_A VALOR:valor_c ARITMETICOS:tipo3 VALOR:valor_d ARITMETICOS:tipo4 VALOR:valor_e PARENTESIS_C {:
+OPERACION ::= VALOR:valor_a ARITMETICOS:tipo1 VALOR:valor_presa ARITMETICOS:tipo2 PARENTESIS_A VALOR:valor_c ARITMETICOS:tipo3 VALOR:valor_d ARITMETICOS:tipo4 VALOR:valor_depredador PARENTESIS_C {:
 Integer num1 = Integer.parseInt(valor_a.toString());
-Integer num2 = Integer.parseInt(valor_b.toString());
+Integer num2 = Integer.parseInt(valor_presa.toString());
 Integer num3 = Integer.parseInt(valor_c.toString());
 Integer num4 = Integer.parseInt(valor_d.toString());
-Integer num5 = Integer.parseInt(valor_e.toString());
+Integer num5 = Integer.parseInt(valor_depredador.toString());
 Character t1= tipo1.toString().charAt(0);
 Character t2= tipo2.toString().charAt(0);
 Character t3= tipo3.toString().charAt(0);
@@ -54,4 +54,6 @@ Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
 
 PARENTESIS::=PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C;
 VALOR ::= DIGITO | NOMBRE;
-RESULTADO::= P_RESERVADA DERIVADA P_COMA | P_RESERVADA DERIVADA CONCATENADOR DERIVADA P_COMA;
+RESULTADO::=  P_RESERVADA DERIVADA:presa CONCATENADOR DERIVADA:depredador P_COMA {:
+Utilidades.imprimirResultado(presa.toString(),depredador.toString());
+:};

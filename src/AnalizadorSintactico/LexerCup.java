@@ -34,11 +34,11 @@ public class LexerCup implements java_cup.runtime.Scanner {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\11\0\1\4\1\6\1\7\1\7\1\6\22\0\1\4\7\0\1\20"+
-    "\1\21\1\22\1\22\1\4\1\22\1\0\1\5\12\3\1\0\1\23"+
-    "\1\0\1\17\3\0\1\24\2\1\1\10\4\1\1\14\4\1\1\15"+
-    "\1\1\1\12\1\1\1\13\1\1\1\16\6\1\4\0\1\2\1\0"+
-    "\27\1\1\11\1\11\1\1\12\0\1\7\u1fa2\0\1\7\1\7\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
+    "\11\0\1\5\1\7\1\10\1\10\1\7\22\0\1\5\7\0\1\21"+
+    "\1\22\1\23\1\23\1\5\1\23\1\4\1\6\12\3\1\0\1\24"+
+    "\1\0\1\20\3\0\1\25\2\1\1\11\4\1\1\15\4\1\1\16"+
+    "\1\1\1\13\1\1\1\14\1\1\1\17\6\1\4\0\1\2\1\0"+
+    "\27\1\1\12\1\12\1\1\12\0\1\10\u1fa2\0\1\10\1\10\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
 
   /** 
    * Translates characters to character classes
@@ -51,9 +51,9 @@ public class LexerCup implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\3\1\4\1\5\2\2\1\6"+
-    "\1\7\1\10\1\5\1\11\2\2\1\4\1\12\3\2"+
-    "\1\13\1\2\1\14";
+    "\1\1\1\2\1\3\1\1\1\4\1\5\2\3\1\6"+
+    "\1\7\1\10\1\5\1\11\2\3\1\4\1\12\3\3"+
+    "\1\13\1\3\1\14";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[23];
@@ -81,9 +81,9 @@ public class LexerCup implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\25\0\52\0\77\0\124\0\151\0\176\0\223"+
-    "\0\25\0\25\0\25\0\25\0\25\0\250\0\275\0\322"+
-    "\0\52\0\347\0\374\0\u0111\0\52\0\u0126\0\52";
+    "\0\0\0\26\0\54\0\102\0\130\0\156\0\204\0\232"+
+    "\0\26\0\26\0\26\0\26\0\26\0\260\0\306\0\334"+
+    "\0\54\0\362\0\u0108\0\u011e\0\54\0\u0134\0\54";
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[23];
@@ -109,23 +109,23 @@ public class LexerCup implements java_cup.runtime.Scanner {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\1\2\1\4\1\5\1\6\1\5\1\0"+
+    "\1\2\1\3\1\2\2\4\1\5\1\6\1\5\1\0"+
     "\1\7\1\3\1\10\4\3\1\11\1\12\1\13\1\14"+
-    "\1\15\1\16\26\0\1\3\2\17\4\0\7\3\5\0"+
-    "\1\3\3\0\1\4\25\0\1\5\1\0\1\5\23\0"+
-    "\1\20\20\0\1\3\2\17\4\0\1\3\1\21\5\3"+
-    "\5\0\1\3\1\0\1\3\2\17\4\0\3\3\1\22"+
-    "\3\3\5\0\1\3\1\0\1\3\2\17\4\0\5\3"+
+    "\1\15\1\16\27\0\1\3\2\17\5\0\7\3\5\0"+
+    "\1\3\3\0\2\4\26\0\1\5\1\0\1\5\24\0"+
+    "\1\20\20\0\1\3\2\17\5\0\1\3\1\21\5\3"+
+    "\5\0\1\3\1\0\1\3\2\17\5\0\3\3\1\22"+
+    "\3\3\5\0\1\3\1\0\1\3\2\17\5\0\5\3"+
     "\1\23\1\3\5\0\1\3\1\0\1\3\1\0\1\17"+
-    "\4\0\7\3\5\0\1\3\6\20\2\0\15\20\1\0"+
-    "\1\3\2\17\4\0\4\3\1\24\2\3\5\0\1\3"+
-    "\1\0\1\3\2\17\4\0\1\25\6\3\5\0\1\3"+
-    "\1\0\1\3\2\17\4\0\5\3\1\26\1\3\5\0"+
-    "\1\3\1\0\1\3\2\17\4\0\6\3\1\27\5\0"+
+    "\5\0\7\3\5\0\1\3\7\20\2\0\15\20\1\0"+
+    "\1\3\2\17\5\0\4\3\1\24\2\3\5\0\1\3"+
+    "\1\0\1\3\2\17\5\0\1\25\6\3\5\0\1\3"+
+    "\1\0\1\3\2\17\5\0\5\3\1\26\1\3\5\0"+
+    "\1\3\1\0\1\3\2\17\5\0\6\3\1\27\5\0"+
     "\1\3";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[315];
+    int [] result = new int[330];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -163,7 +163,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\6\1\5\11\12\1";
+    "\1\1\1\11\6\1\5\11\12\1";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[23];
@@ -632,27 +632,27 @@ public class LexerCup implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
+            { generateTable.addArrayList("DIGITO");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.DIGITO, yychar, yyline, yytext());
+            }
+          case 13: break;
+          case 2: 
             { generateTable.addArrayList("ERROR");
           generateTable.addArrayList1(yytext());
           generateTable.addArrayList2(yyline + 1);
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.ERROR, yychar, yyline, yytext());
             }
-          case 13: break;
-          case 2: 
+          case 14: break;
+          case 3: 
             { generateTable.addArrayList("NOMBRE");
           generateTable.addArrayList1(yytext());
           generateTable.addArrayList2(yyline + 1);
          generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.NOMBRE, yychar, yyline, yytext());
-            }
-          case 14: break;
-          case 3: 
-            { generateTable.addArrayList("DIGITO");
-          generateTable.addArrayList1(yytext());
-          generateTable.addArrayList2(yyline + 1);
-          generateTable.addArrayList3(yycolumn  + 1);
-          return new Symbol(sym.DIGITO, yychar, yyline, yytext());
             }
           case 15: break;
           case 4: 

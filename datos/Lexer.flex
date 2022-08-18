@@ -10,7 +10,8 @@ import Sintactico.generateTable;
 %line
 %char
 L=[a-zA-Z]+[_]?[a-zA-Z0-9]*
-D=[0-9]+
+//D=[0-9]+
+D=[0-9]*[.]?[0-9]*
 espacio=[ ,\t,\r,\n]+
 %{
     private Symbol symbol (int type, Object value){
