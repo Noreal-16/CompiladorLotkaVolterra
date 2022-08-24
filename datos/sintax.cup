@@ -3,6 +3,7 @@ import java_cup.runtime.Symbol;
 import Sintactico.Utilidades;
 import java.util.ArrayList;
 import java.util.List;
+import Sintactico.Variable;
 
 parser code
 {:
@@ -16,60 +17,66 @@ parser code
 :};
 action code
 {:
-    public Integer a,b,c,d,e;
-    public  List<Integer> variables =  new ArrayList<>();
+    public Double a;
+    public String palabras;
+    public  List<Double> variables =  new ArrayList<>();
+    public  List<String> variablesNombre =  new ArrayList<>();
 :}
 
-terminal ASIGNACION, PARENTESIS_A, PARENTESIS_C, ARITMETICOS, CONCATENADOR, P_COMA, NOMBRE, DIGITO, ERROR, P_RESERVADA, DERIVADA;
-non terminal INICIO, VARIABLE, SENTENCIA, DECLARACION,RESULTADO, DESARROLLO, DESARROLLO_PARENTESIS2,OPERACION, OPERACION1, VALOR,AUXOPERACION,PARENTESIS;
+terminal ASIGNACION, PARENTESIS_A, PARENTESIS_C,DEPREDADORES,PRESAS, MULTIPLICACION,RESTA, CONCATENADOR, P_COMA, NOMBRE, DIGITO, ERROR, P_RESERVADA, DERIVADA;
+non terminal INICIO, VARIABLE, SENTENCIA, DECLARACION,RESULTADO, DESARROLLO, DESARROLLO_PARENTESIS2,OPERACIONP, OPERACIOND, VALOR,AUXOPERACION,PARENTESIS;
 INICIO ::= SENTENCIA;
-SENTENCIA ::= DECLARACION | DESARROLLO RESULTADO |DECLARACION SENTENCIA | DESARROLLO  SENTENCIA;
+SENTENCIA ::= DECLARACION | DESARROLLO | RESULTADO |DECLARACION SENTENCIA | DESARROLLO  SENTENCIA;
 
 DECLARACION ::= NOMBRE:nombre ASIGNACION DIGITO:valor P_COMA
    {:
     Utilidades.addVarible(nombre.toString(), valor.toString());
    :}| NOMBRE:nombre ASIGNACION NOMBRE:nombre_a P_COMA {:
     Utilidades.addVarible(nombre.toString(), nombre_a.toString());
-   :}|NOMBRE:nombre ASIGNACION OPERACION:operador P_COMA {:
+   :}|NOMBRE:nombre ASIGNACION OPERACIONP:operador P_COMA {:
     Utilidades.addVarible(nombre.toString(), operador.toString());
-   :}| DERIVADA:operador ASIGNACION NOMBRE:nombre P_COMA {:
+   :}|PRESAS:operador ASIGNACION NOMBRE:nombre P_COMA {:
     Utilidades.addVarible(operador.toString(), nombre.toString());
-   :}| NOMBRE:nombre ASIGNACION OPERACION1:operador P_COMA{:
+   :}|DEPREDADORES:operador ASIGNACION NOMBRE:nombre P_COMA {:
+    Utilidades.addVarible(operador.toString(), nombre.toString());
+   :}| NOMBRE:nombre ASIGNACION OPERACIOND:operador P_COMA{:
     Utilidades.addVarible(nombre.toString(), operador.toString());
    :};
 VALOR ::= DIGITO:dig {:
-System.out.println("El digito "  + dig.toString());
-a = Integer.parseInt(dig.toString());
+//if (!variables.contains(Double.parseDouble(dig.toString()))) {
+
+a = Double.parseDouble(dig.toString());
 variables.add(a);
+//}else{
+//System.out.println("No se puede agregar ma valores ");
+//}
 :}| NOMBRE:nombre {:
-System.out.println("El nombre "  + nombre.toString());
+if (!variablesNombre.contains(nombre.toString())) {
+palabras = nombre.toString();
+variablesNombre.add(palabras);
+}
 :};
-DESARROLLO ::= DERIVADA ASIGNACION OPERACION P_COMA| DERIVADA  ASIGNACION PARENTESIS  P_COMA  ;
-// Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
-OPERACION ::= VALOR:valor_a ARITMETICOS:tipo1 VALOR:valor_presa ARITMETICOS:tipo2 PARENTESIS_A VALOR:valor_c ARITMETICOS:tipo3 VALOR:valor_d ARITMETICOS:tipo4 VALOR:valor_depredador PARENTESIS_C {:
-System.out.println("operacion " + variables.toString());
-Integer num1 = variables.get(0);
-Integer num2 = variables.get(1);
-Integer num3 = variables.get(2);
-Integer num4 = variables.get(3);
-Integer num5 = variables.get(4);
-Character t1= tipo1.toString().charAt(0);
-Character t2= tipo2.toString().charAt(0);
-Character t3= tipo3.toString().charAt(0);
-Character t4= tipo4.toString().charAt(0);
-Utilidades.operaciones(num1, num2, num3, num4, num5, t1,t2,t3,t4);
+DESARROLLO ::= PRESAS ASIGNACION OPERACIONP P_COMA DEPREDADORES ASIGNACION OPERACIOND P_COMA{:
+Utilidades.OperacionLotkaVolterra(variables);
+:};
+
+// Dx = a1 * 5 - 12*8*9; PRINT Dx AND Dy;
+OPERACIONP ::= VALOR MULTIPLICACION VALOR RESTA VALOR MULTIPLICACION  VALOR RESTA VALOR|
+VALOR:valor_a MULTIPLICACION VALOR:valor_presa RESTA PARENTESIS_A VALOR:valor_c MULTIPLICACION VALOR:valor_d MULTIPLICACION VALOR:valor_depredador PARENTESIS_C {:
+
 :}|
-              PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS  VALOR ARITMETICOS VALOR ARITMETICOS VALOR |
-              PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C |
-              ARITMETICOS VALOR ARITMETICOS VALOR ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
-              PARENTESIS_A ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C|
-              PARENTESIS_A VALOR ARITMETICOS VALOR ARITMETICOS VALOR PARENTESIS_C ARITMETICOS PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C |
-              VALOR ARITMETICOS VALOR ARITMETICOS VALOR ARITMETICOS  VALOR ARITMETICOS VALOR;
+              PARENTESIS_A VALOR MULTIPLICACION VALOR PARENTESIS_C RESTA  VALOR MULTIPLICACION VALOR MULTIPLICACION VALOR |
+              PARENTESIS_A VALOR MULTIPLICACION VALOR PARENTESIS_C RESTA PARENTESIS_A VALOR MULTIPLICACION VALOR MULTIPLICACION VALOR PARENTESIS_C;
 
-PARENTESIS::=PARENTESIS_A VALOR ARITMETICOS VALOR PARENTESIS_C;
+OPERACIOND::= VALOR MULTIPLICACION VALOR MULTIPLICACION VALOR  RESTA  VALOR MULTIPLICACION VALOR |
+              PARENTESIS_A VALOR MULTIPLICACION VALOR MULTIPLICACION VALOR PARENTESIS_C RESTA  VALOR MULTIPLICACION VALOR{:
 
-RESULTADO::=  P_RESERVADA DERIVADA:presa CONCATENADOR DERIVADA:depredador P_COMA {:
+              :}  |
+
+              PARENTESIS_A VALOR MULTIPLICACION VALOR MULTIPLICACION VALOR PARENTESIS_C RESTA PARENTESIS_A VALOR MULTIPLICACION VALOR PARENTESIS_C |
+              VALOR MULTIPLICACION VALOR MULTIPLICACION VALOR  RESTA PARENTESIS_A VALOR MULTIPLICACION VALOR PARENTESIS_C;
+
+RESULTADO::=  P_RESERVADA PRESAS:presa CONCATENADOR DEPREDADORES:depredador P_COMA {:
 System.out.println("Ingreso" + presa);
 System.out.println("Ingresos" + depredador);
-Utilidades.imprimirResultado(presa.toString(),depredador.toString());
 :};

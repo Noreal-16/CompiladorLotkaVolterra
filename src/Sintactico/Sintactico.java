@@ -60,26 +60,24 @@ public class Sintactico {
         }
     }
     public static void main(String[] args) {
-       
-        GeneradorLexer();
-
-        //ENTERO a; \n ENTERO b =45; \n ENTERO imprimir (){ENTERO c = 56; PRINT ()};
 
         /**
          * Analizador Sintactico
          * ECUACIONES
          *   Dx = A*x-B*x*y;
-         *   Dy = -Cy + Dxy || Dy = Dxy - Cy;
-         *  a = 12; b=13; c = 12; d = 0.5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
+         *   Dy = Dxy - Cy;
+         *  a = 12; b=13;c = 12; d = 0.5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
          */
-        String cadena = " a = 12; b=13; c = 12; d = 0.5; Dx = 12 * 5 - (12*8*9); PRINT Dx AND Dy; ";
+         GeneradorLexer();
+        String cadena = " a1 = 12;  r1=13; a2 = 12;  r2=13; presas= 2;  depredadores = 1; " +
+                        " Dx = r1 * presas  - (a1*presas*depredadores); Dy = (a2*presas*depredadores) - r2 * depredadores; ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
-
-
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
             //generateTable.imprimirLista();
+            Utilidades.imprimirVariables();
+            Utilidades.imprimirLotkaVolterra();
             Utilidades.validarEntradas();
         }catch (Exception e){
             //generateTable.imprimirLista();

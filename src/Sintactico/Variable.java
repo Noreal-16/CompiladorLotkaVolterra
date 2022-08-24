@@ -8,6 +8,8 @@ public class Variable {
         this.nombre = nombre;
         this.valor = valor;
     }
+    public Variable() {
+    }
 
     public String getNombre() {
         return nombre;
