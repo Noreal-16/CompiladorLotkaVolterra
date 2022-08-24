@@ -70,9 +70,10 @@ public class Sintactico {
          * ECUACIONES
          *   Dx = A*x-B*x*y;
          *   Dy = -Cy + Dxy || Dy = Dxy - Cy;
-         *  a = 12; b=13; c = 12; d = 0.5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
+         *  a = 12; b=13;c = 12; d = 0.5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
          */
-        String cadena = " a = 12; b=13; c = 12; d = 0.5; Dx = 12 * 5 - (12*8*9); PRINT Dx AND Dy; ";
+        String cadena = " a1 = 12; r1=13;  presas= 2; depredadores = 1;" +
+                        " Dx = a1 * presas  - (r1*presas*depredadores); PRINT Dx AND Dy; ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
 
 
@@ -80,6 +81,7 @@ public class Sintactico {
         try {
             s.parse();
             //generateTable.imprimirLista();
+            Utilidades.imprimirVariables();
             Utilidades.validarEntradas();
         }catch (Exception e){
             //generateTable.imprimirLista();
