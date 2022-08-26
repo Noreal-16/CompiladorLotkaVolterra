@@ -68,9 +68,9 @@ public class Sintactico {
          *   Dy = Dxy - Cy;
          *  a = 12; b=13;c = 12; d = 0.5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
          */
-         GeneradorLexer();
+         //GeneradorLexer();
         String cadena = " a1 = 12;  r1=13; a2 = 12;  r2=13; presas= 2;  depredadores = 1; " +
-                        " Dx = r1 * presas  - (a1*presas*depredadores); Dy = (a2*presas*depredadores) - r2 * depredadores; ";
+                        " Dx = 0.5 * 2  - (0.7*2*1); Dy = (0.35*2*1) - 0.35 * 1; ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
         Sintax s = new Sintax(lexerCup);
         try {

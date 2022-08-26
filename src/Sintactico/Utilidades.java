@@ -35,6 +35,17 @@ public class Utilidades {
     public static List resultadoDepredador = new ArrayList();
 
     public static void OperacionLotkaVolterra(List<Double> presas) {
+
+        List<Double> valoresPresas = new ArrayList<>();
+        List<Double> valoresDepredador = new ArrayList<>();
+        if (presas.size() == 10) {
+            valoresPresas.add(presas.get(1));
+            valoresPresas.add(presas.get(3));
+            valoresPresas.add(presas.get(6));
+            valoresDepredador.add(presas.get(4));
+            valoresDepredador.add(presas.get(7));
+            valoresDepredador.add(presas.get(9));
+        }
         double t0 = 0.0;
         int n = 1000;
         double tn = 100;
@@ -46,15 +57,26 @@ public class Utilidades {
         double depredadores = presas.get(4);
         for (int i = 1; i <= 2; i++) {
             System.out.println(presasV + " + " + h + " * " + presas.get(0) + " * " + presasV + " - ( " + presas.get(2) + " * " + presasV + " * " + depredadores + ")");
-            f0 = presasV + (h * ((presas.get(0) * presasV) - (presas.get(2) * presasV * depredadores)));
-            f1 = depredadores + (h * ((presas.get(5) * presasV * (depredadores - presas.get(8) * depredadores))));
+
+            /*f0 = presasV + (h * ((presas.get(0) * presasV) - (presas.get(2) * presasV * depredadores)));
+            f1 = depredadores + (h * ((presas.get(5) * presasV * (depredadores - presas.get(8) * depredadores))));*/
+            f0 = valoresPresas.get(0) + (h * ((presas.get(0) * valoresPresas.get(0)) - (presas.get(2) * valoresPresas.get(1) * valoresDepredador.get(0))));
+            f1 = valoresDepredador.get(0) + (h * ((presas.get(5) * valoresPresas.get(2) * (valoresDepredador.get(1) - presas.get(8) * valoresDepredador.get(2)))));
+
             double presasPonderado = f0 * 1000;
             double depredadorPonderado = f1 * 1000;
+
             resultadoPresa.add(presasPonderado);
             resultadoDepredador.add(depredadorPonderado);
 
-            presasV = f0;
-            depredadores = f1;
+            valoresPresas.set(0, f0);
+            valoresPresas.set(1, f0);
+            valoresPresas.set(2, f0);
+            System.out.println("Los valores presas son " + valoresPresas.toString());
+            valoresDepredador.set(0, f1);
+            valoresDepredador.set(1, f1);
+            valoresDepredador.set(2, f1);
+            System.out.println("Los valores depredadores son " + valoresDepredador.toString());
         }
     }
 
