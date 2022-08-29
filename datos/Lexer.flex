@@ -87,6 +87,35 @@ espacio=[ ,\t,\r,\n]+
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.P_COMA, yychar, yyline, yytext());
       }
+
+("TCD") {
+          generateTable.addArrayList("TCD");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.TCD, yychar, yyline, yytext());
+      }
+("TCP") {
+          generateTable.addArrayList("TCP");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.TCP, yychar, yyline, yytext());
+      }
+("ECDP") {
+          generateTable.addArrayList("ECDP");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.ECDP, yychar, yyline, yytext());
+      }
+("ECAD") {
+          generateTable.addArrayList("ECAD");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.ECAD, yychar, yyline, yytext());
+      }
 ("AND") {
           generateTable.addArrayList("CONCATENADOR");
           generateTable.addArrayList1(yytext());
@@ -108,6 +137,7 @@ espacio=[ ,\t,\r,\n]+
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.DIGITO, yychar, yyline, yytext());
       }
+
  . {
           generateTable.addArrayList("ERROR");
           generateTable.addArrayList1(yytext());

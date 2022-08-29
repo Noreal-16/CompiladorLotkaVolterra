@@ -68,19 +68,19 @@ public class Sintactico {
          *   Dy = Dxy - Cy;
          *  a = 12; b=13;c = 12; d = 0.5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
          */
-         //GeneradorLexer();
-        String cadena = " a1 = 12;  r1=13; a2 = 12;  r2=13; presas= 2;  depredadores = 1; " +
-                        " Dx = 0.5 * 2  - (0.7*2*1); Dy = (0.35*2*1) - 0.35 * 1; ";
+        //GeneradorLexer();
+        String cadena = " TCP=0.2; TCD=0.5; ECAD=0.7; ECDP=0.3; a1 = 12;  r1=13; a2 = 12;  r2=13; presas= 2;  depredadores = 1; " +
+                        " Dx = TCP * presas  - (ECDP*presas*depredadores); Dy = (ECAD*presas*depredadores) - TCD * depredadores; ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
-            //generateTable.imprimirLista();
+            generateTable.imprimirLista();
             Utilidades.imprimirVariables();
             Utilidades.imprimirLotkaVolterra();
             Utilidades.validarEntradas();
         }catch (Exception e){
-            //generateTable.imprimirLista();
+            generateTable.imprimirLista();
             System.out.println("Hay un ERROR " + e);
             Symbol sym = s.getS();
             if(sym != null){
