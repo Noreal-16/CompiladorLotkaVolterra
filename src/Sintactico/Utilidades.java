@@ -92,6 +92,7 @@ public class Utilidades {
             for (int i = 1; i <= 2; i++) {
                 System.out.println(presasV + " + " + h + " * " + presas.get(0) + " * " + presasV + " - ( " + presas.get(2) + " * " + presasV + " * " + depredadores + ")");
 
+
             /*f0 = presasV + (h * ((presas.get(0) * presasV) - (presas.get(2) * presasV * depredadores)));
             f1 = depredadores + (h * ((presas.get(5) * presasV * (depredadores - presas.get(8) * depredadores))));*/
                 f0 = presasV + (h * ((presas.get(0) * presasV) - (presas.get(1) * presasV * depredadores)));
