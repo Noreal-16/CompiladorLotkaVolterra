@@ -74,7 +74,7 @@ public class Sintactico {
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
         Sintax s = new Sintax(lexerCup);
         try {
-            s.parse();
+            s.parse(); 
             generateTable.imprimirLista();
             Utilidades.imprimirVariables();
             Utilidades.imprimirLotkaVolterra();
