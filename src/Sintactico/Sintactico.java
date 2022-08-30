@@ -69,14 +69,17 @@ public class Sintactico {
          *  a = 12; b=13;c = 12; d = 0.5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
          */
         //GeneradorLexer();
-        String cadena = " TCP=0.2; TCD=0.5; ECAD=0.7; ECDP=0.3; a1 = 12;  r1=13; a2 = 12;  r2=13; presas= 2;  depredadores = 1; " +
+        String cadena = "  TCP=0.5; ECDP=0.7; TCD=0.35;  ECAD=0.35; presas= 2;  depredadores = 1; " +
                         " Dx = TCP * presas  - (ECDP*presas*depredadores); Dy = (ECAD*presas*depredadores) - TCD * depredadores; ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
         Sintax s = new Sintax(lexerCup);
         try {
-            s.parse(); 
-            generateTable.imprimirLista();
-            Utilidades.imprimirVariables();
+
+            s.parse();
+            Utilidades.operacionVariables();
+            //generateTable.imprimirLista();
+            //Utilidades.imprimirVariables();
+
             Utilidades.imprimirLotkaVolterra();
             Utilidades.validarEntradas();
         }catch (Exception e){
