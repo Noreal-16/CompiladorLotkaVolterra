@@ -23,9 +23,11 @@ public class Utilidades {
 
     public static void validarEntradas() throws VariableDeclaradaException {
         int contador = 0;
-        for (int i = 1; i < variables.size(); i++) {
-            if (variables.get(contador).getNombre().equals(variables.get(i).getNombre()) && !(variables.get(i).getNombre().isEmpty())) {
-                throw new VariableDeclaradaException("La Variable " + " -> " + variables.get(contador).getNombre() + " ya se encuentra definida ");
+        for (int i = 0; i < variables.size()-1; i++) {
+            for (int j = i + 1; j < variables.size(); j++) {
+                if (variables.get(i).getNombre().equals(variables.get(j).getNombre())) {
+                    throw new VariableDeclaradaException("La Variable " + " -> " + variables.get(j).getNombre() + " ya se encuentra definida ");
+                }
             }
         }
         contador++;
@@ -78,7 +80,7 @@ public class Utilidades {
                 valoresDepredador.set(2, f1);
                 System.out.println("Los valores depredadores son " + valoresDepredador.toString());
             }
-        } else if(presas.size() == 6) {
+        } else if (presas.size() == 6) {
             System.out.println("Los valores de la nueva lista son " + presas);
             double t0 = 0.0;
             int n = 1000;
