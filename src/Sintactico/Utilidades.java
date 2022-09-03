@@ -45,7 +45,7 @@ public class Utilidades {
      *
      * @param presas
      */
-    public static void OperacionLotkaVolterra(List<Double> presas) {
+    public static void OperacionLotkaVolterra(List<Double> presas, String tiempo) {
 
         List<Double> valoresPresas = new ArrayList<>();
         List<Double> valoresDepredador = new ArrayList<>();
@@ -59,12 +59,19 @@ public class Utilidades {
         int n = 1000;
         double tn = 100;
 
-        double h = 0.1;
+        double h = 0.01;
         double f0, f1;
+
+        int tiemposEvolucion = 0;
+        for (int i = 0; i <variables.size(); i++) {
+            if (tiempo.equals(variables.get(i).getNombre())) {
+                tiemposEvolucion = Integer.parseInt(variables.get(i).getValor().toString());
+            }
+        }
 
         double presasV = presas.get(1);
         double depredadores = presas.get(4);
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 1; i <= tiemposEvolucion; i++) {
             f0 = valoresPresas.get(0) + (h * ((presas.get(0) * valoresPresas.get(0)) - (presas.get(2) * valoresPresas.get(1) * valoresDepredador.get(0))));
             f1 = valoresDepredador.get(0) + (h * ((presas.get(5) * valoresPresas.get(2) * (valoresDepredador.get(1) - presas.get(8) * valoresDepredador.get(2)))));
 
@@ -74,14 +81,14 @@ public class Utilidades {
             resultadoPresa.add(presasPonderado);
             resultadoDepredador.add(depredadorPonderado);
 
+            //Cambiar valores de presas
             valoresPresas.set(0, f0);
             valoresPresas.set(1, f0);
             valoresPresas.set(2, f0);
-            System.out.println("Los valores presas son " + valoresPresas.toString());
+            //Cambiar valores de depredadores
             valoresDepredador.set(0, f1);
             valoresDepredador.set(1, f1);
             valoresDepredador.set(2, f1);
-            System.out.println("Los valores depredadores son " + valoresDepredador.toString());
         }
     }
 
@@ -90,8 +97,9 @@ public class Utilidades {
      *
      * @param lista
      */
-    public static void operarVariables(List<String> lista) {
+    public static void operarVariables(List<String> lista, String tiempo) {
         Double tcp = 0.0, presa = 0.0, ecdp = 0.0, depredador = 0.0, ecad = 0.0, tcd = 0.0;
+
         for (int i = 0; i < variables.size(); i++) {
             if (lista.get(0).equals(variables.get(i).getNombre())) {
                 tcp = Double.parseDouble(variables.get(i).getValor().toString());
@@ -115,7 +123,15 @@ public class Utilidades {
         double f0, f1;
         double valorP = presa;
         double valorD = depredador;
-        for (int i = 1; i <= 2; i++) {
+
+        int tiemposEvolucion = 0;
+        for (int i = 0; i <variables.size(); i++) {
+            if (tiempo.equals(variables.get(i).getNombre())) {
+                tiemposEvolucion = Integer.parseInt(variables.get(i).getValor().toString());
+            }
+        }
+
+        for (int i = 1; i <= tiemposEvolucion; i++) {
             f0 = valorP + (h * ((tcp * valorP) - (ecdp * valorP * valorD)));
             f1 = valorD + (h * ((ecad * valorP * valorD) - (tcd * valorD)));
 

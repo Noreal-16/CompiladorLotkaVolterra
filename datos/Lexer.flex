@@ -45,6 +45,13 @@ espacio=[ ,\t,\r,\n]+
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.P_RESERVADA, yychar, yyline, yytext());
       }
+ ("TIEMPO"|"tiempo" |"tmp" |"time") {
+          generateTable.addArrayList("TIEMPO");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.TIEMPO, yychar, yyline, yytext());
+      }
 ("=") {
           generateTable.addArrayList("ASIGNACION");
           generateTable.addArrayList1(yytext());

@@ -16,25 +16,25 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Sintactico {
-    public static String URL = "datos"+ File.separatorChar;
+    public static String URL = "datos" + File.separatorChar;
 
-    public static void GeneradorLexer(){
+    public static void GeneradorLexer() {
         /**
          * Generador de Sym, Sintex, LexerCup
          */
 
-        String [] rutas = {URL+"Lexer.flex"};
-        String [] rutasS = {"-parser","Sintax",URL+"sintax.cup"};
+        String[] rutas = {URL + "Lexer.flex"};
+        String[] rutasS = {"-parser", "Sintax", URL + "sintax.cup"};
         try {
             java_cup.Main.main(rutasS);
             jflex.Main.generate(rutas);
             ///////////////////////////////
-            Path sym = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src"+File.separatorChar + "AnalizadorSintactico"
-            + File.separatorChar + "sym.java");
-            Path sintax = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src"+File.separatorChar + "AnalizadorSintactico"
-            + File.separatorChar + "Sintax.java");
-            Path lexer = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src"+File.separatorChar + "AnalizadorSintactico"
-            + File.separatorChar + "LexerCup.java");
+            Path sym = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "AnalizadorSintactico"
+                    + File.separatorChar + "sym.java");
+            Path sintax = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "AnalizadorSintactico"
+                    + File.separatorChar + "Sintax.java");
+            Path lexer = Paths.get(System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "AnalizadorSintactico"
+                    + File.separatorChar + "LexerCup.java");
             /*
             Eliminar archivos
              */
@@ -46,8 +46,8 @@ public class Sintactico {
              */
             Files.move(Paths.get(System.getProperty("user.dir") + File.separatorChar + "sym.java"), sym);
             Files.move(Paths.get(System.getProperty("user.dir") + File.separatorChar + "Sintax.java"), sintax);
-            Files.move(Paths.get(URL+"LexerCup.java"),lexer);
-            
+            Files.move(Paths.get(URL + "LexerCup.java"), lexer);
+
         } catch (SilentExit e) {
             System.out.println("ERROR" + e);
             //throw new RuntimeException(e);
@@ -59,6 +59,7 @@ public class Sintactico {
             throw new RuntimeException(e);
         }
     }
+
     public static void main(String[] args) {
 
         /**
@@ -67,36 +68,34 @@ public class Sintactico {
          *   Dx = A*x-B*x*y;
          *   Dy = Dxy - Cy;
          *  a = 12; b=13;c = 12; d = 0.5; Dx = 12 * 5 - 12*8*9; PRINT Dx AND Dy;
+         *  Dx = TCP * presa  - (ECDP*presa*depredador); Dy = (ECAD*presa*depredador) - TCD * depredador; PRINT Dx AND Dy;
+         *  Dx = 0.5 * 2  - (0.7*2*1); Dy = (0.35*2*1) - 0.35 * 1; PRINT Dx AND Dy;
          */
         //GeneradorLexer();
-        String cadena = " TCP=0.5; ECDP=0.7; TCD=0.35;  ECAD=0.35; presas= 2;  depredadores = 1;  " +
-                        " Dx = TCP * presas  - (ECDP*presas*depredadores); Dy = (ECAD*presas*depredadores) - TCD * depredadores;  ";
+        String cadena = " TCP=0.5; ECDP=0.7; TCD=0.35;  ECAD=0.35; presa= 2;  depredador = 1; tmp=3; " +
+                " tmp Dx = TCP * presa  - (ECDP*presa*depredador); Dy = (ECAD*presa*depredador) - TCD * depredador; PRINT Dx AND Dy; ";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
-            //Utilidades.operacionVariables();
             //generateTable.imprimirLista();
-            //Utilidades.imprimirVariables();
-            Utilidades.imprimirLotkaVolterra();
             Utilidades.validarEntradas();
-        }catch (Exception e){
-            //generateTable.imprimirLista();
+        } catch (Exception e) {
             System.out.println("Hay un ERROR " + e);
             Symbol sym = s.getS();
-            if(sym != null){
-                System.out.println("Error Syntactico en la linea " + (sym.right + 1) + " Columna " +  (sym.left + 1) + " Texto " + (sym.value));
+            if (sym != null) {
+                System.out.println("Error Syntactico en la linea " + (sym.right + 1) + " Columna " + (sym.left + 1) + " Texto " + (sym.value));
             }
         }
 
     }
-    
-    private static void eliminar(Path ruta){
+
+    private static void eliminar(Path ruta) {
         try {
-            if (Files.exists(ruta)){
+            if (Files.exists(ruta)) {
                 Files.delete(ruta);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
