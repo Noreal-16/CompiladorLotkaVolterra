@@ -113,51 +113,84 @@ variables.add(Double.parseDouble(valor_5.toString()));
 
 //Desarrollo de operaciones con Variables
 DESARROLLO_VARIABLE::= TIEMPO:valor_t PRESAS ASIGNACION OPERACIONP_VARIABLE  P_COMA DEPREDADORES ASIGNACION OPERACIOND_VARIABLE  P_COMA {:
+ if(Utilidades.verificar(valor_t.toString())){
 Utilidades.operarVariables(variablesNombre, valor_t.toString());
+
+}
+
+
 :};
 
 OPERACIONP_VARIABLE::= TCP:valor_a MULTIPLICACION PRESA:valor_b RESTA ECDP:valor_c MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR:valor_d {:
+
+if(Utilidades.verificar(valor_a.toString()) | Utilidades.verificar(valor_b.toString())  | Utilidades.verificar(valor_c.toString())  | Utilidades.verificar(valor_d.toString())){
+
 variablesNombre.add(valor_a.toString());
 variablesNombre.add(valor_b.toString());
 variablesNombre.add(valor_c.toString());
 variablesNombre.add(valor_d.toString());
+}
+
 :}|
                 TCP:valor_a MULTIPLICACION PRESA:valor_b RESTA PARENTESIS_A ECDP:valor_c MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR:valor_d PARENTESIS_C {:
-                variablesNombre.add(valor_a.toString());
-                variablesNombre.add(valor_b.toString());
-                variablesNombre.add(valor_c.toString());
-                variablesNombre.add(valor_d.toString());
+                if(Utilidades.verificar(valor_a.toString()) | Utilidades.verificar(valor_b.toString())  | Utilidades.verificar(valor_c.toString())  | Utilidades.verificar(valor_d.toString())){
+
+variablesNombre.add(valor_a.toString());
+variablesNombre.add(valor_b.toString());
+variablesNombre.add(valor_c.toString());
+variablesNombre.add(valor_d.toString());
+}
                 :}|
                 PARENTESIS_A TCP:valor_a MULTIPLICACION PRESA:valor_b PARENTESIS_C RESTA ECDP:valor_c MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR:valor_d {:
-                variablesNombre.add(valor_a.toString());
-                variablesNombre.add(valor_b.toString());
-                variablesNombre.add(valor_c.toString());
-                variablesNombre.add(valor_d.toString());
+                if(Utilidades.verificar(valor_a.toString()) | Utilidades.verificar(valor_b.toString())  | Utilidades.verificar(valor_c.toString())  | Utilidades.verificar(valor_d.toString())){
+
+variablesNombre.add(valor_a.toString());
+variablesNombre.add(valor_b.toString());
+variablesNombre.add(valor_c.toString());
+variablesNombre.add(valor_d.toString());
+}
                 :}|
                 PARENTESIS_A TCP:valor_a MULTIPLICACION PRESA:valor_b PARENTESIS_C RESTA PARENTESIS_A ECDP:valor_c MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR:valor_d PARENTESIS_C {:
-                variablesNombre.add(valor_a.toString());
-                variablesNombre.add(valor_b.toString());
-                variablesNombre.add(valor_c.toString());
-                variablesNombre.add(valor_d.toString());
+                if(Utilidades.verificar(valor_a.toString()) | Utilidades.verificar(valor_b.toString())  | Utilidades.verificar(valor_c.toString())  | Utilidades.verificar(valor_d.toString())){
+
+variablesNombre.add(valor_a.toString());
+variablesNombre.add(valor_b.toString());
+variablesNombre.add(valor_c.toString());
+variablesNombre.add(valor_d.toString());
+}
                 :};
 
 
 OPERACIOND_VARIABLE::= ECAD:valor_1 MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR RESTA TCD:valor_2 MULTIPLICACION DEPREDADOR {:
+
+if(Utilidades.verificar(valor_1.toString()) | Utilidades.verificar(valor_2.toString())){
 variablesNombre.add(valor_1.toString());
 variablesNombre.add(valor_2.toString());
+
+}
+
 :}|
 
                 PARENTESIS_A ECAD:valor_1 MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR PARENTESIS_C RESTA  TCD:valor_2 MULTIPLICACION DEPREDADOR {:
-                variablesNombre.add(valor_1.toString());
-                variablesNombre.add(valor_2.toString());
+                if(Utilidades.verificar(valor_1.toString()) | Utilidades.verificar(valor_2.toString())){
+variablesNombre.add(valor_1.toString());
+variablesNombre.add(valor_2.toString());
+
+}
                 :}|
                 PARENTESIS_A ECAD:valor_1 MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR PARENTESIS_C RESTA PARENTESIS_A TCD:valor_2 MULTIPLICACION DEPREDADOR PARENTESIS_C {:
-                variablesNombre.add(valor_1.toString());
-                variablesNombre.add(valor_2.toString());
+                if(Utilidades.verificar(valor_1.toString()) | Utilidades.verificar(valor_2.toString())){
+variablesNombre.add(valor_1.toString());
+variablesNombre.add(valor_2.toString());
+
+}
                 :}|
                 ECAD:valor_1 MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR  RESTA PARENTESIS_A TCD:valor_2 MULTIPLICACION DEPREDADOR PARENTESIS_C {:
-                variablesNombre.add(valor_1.toString());
-                variablesNombre.add(valor_2.toString());
+                if(Utilidades.verificar(valor_1.toString()) | Utilidades.verificar(valor_2.toString())){
+variablesNombre.add(valor_1.toString());
+variablesNombre.add(valor_2.toString());
+
+}
                 :};
 
 RESULTADO::=  P_RESERVADA PRESAS:presa CONCATENADOR DEPREDADORES:depredador P_COMA {:

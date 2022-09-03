@@ -36,6 +36,29 @@ public class Utilidades {
             }
         }
     }
+    public static Boolean verificar(String  nombre)throws VariableDeclaradaException{
+        if(buscarPosicion(nombre) >= 0){
+            return true;
+        }else
+            throw new VariableDeclaradaException("La varibale: " +nombre+" "+"no esta definida");
+        
+       
+    }
+    public static Integer buscarPosicion(String nombre){
+        Integer pos = -1;
+        Integer cont = 0;
+        
+        for(Variable aux : variables){
+            if(aux.getNombre().equals(nombre)){
+                pos = cont;
+                break;
+            }
+            cont++;
+        }
+        
+        return pos;
+        
+    } 
 
     public static List resultadoPresa = new ArrayList();
     public static List resultadoDepredador = new ArrayList();
