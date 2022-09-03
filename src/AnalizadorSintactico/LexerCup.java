@@ -37,8 +37,9 @@ public class LexerCup implements java_cup.runtime.Scanner {
     "\11\0\1\5\1\7\1\10\1\10\1\7\22\0\1\5\7\0\1\22"+
     "\1\23\1\24\1\0\1\5\1\25\1\4\1\6\12\3\1\0\1\26"+
     "\1\0\1\21\3\0\1\31\1\1\1\27\1\11\1\30\3\1\1\16"+
-    "\4\1\1\17\1\1\1\14\1\1\1\15\1\1\1\20\6\1\4\0"+
-    "\1\2\1\0\27\1\1\12\1\13\1\1\12\0\1\10\u1fa2\0\1\10"+
+    "\4\1\1\17\1\40\1\14\1\1\1\15\1\32\1\20\6\1\4\0"+
+    "\1\2\1\0\1\37\2\1\1\41\1\35\11\1\1\42\1\33\1\1"+
+    "\1\34\1\36\4\1\1\12\1\13\1\1\12\0\1\10\u1fa2\0\1\10"+
     "\1\10\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
 
   /** 
@@ -53,12 +54,12 @@ public class LexerCup implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\1\1\2\1\3\1\1\1\4\1\2\3\3\1\5"+
-    "\1\6\1\7\1\10\1\11\1\12\3\3\1\4\1\13"+
-    "\1\14\5\3\1\15\1\16\2\3\1\17\1\3\1\20"+
-    "\1\21\1\22";
+    "\1\6\1\7\1\10\1\11\1\12\5\3\1\4\1\13"+
+    "\1\14\12\3\1\15\1\16\2\3\1\17\5\3\1\20"+
+    "\1\21\3\3\1\22\1\23\11\3\1\24";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[35];
+    int [] result = new int[60];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -83,14 +84,17 @@ public class LexerCup implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\32\0\64\0\116\0\150\0\202\0\234\0\266"+
-    "\0\320\0\32\0\32\0\32\0\32\0\32\0\32\0\352"+
-    "\0\u0104\0\u011e\0\u0138\0\64\0\64\0\u0152\0\u016c\0\u0186"+
-    "\0\u01a0\0\u01ba\0\64\0\64\0\u01d4\0\u01ee\0\64\0\u0208"+
-    "\0\64\0\64\0\64";
+    "\0\0\0\43\0\106\0\151\0\214\0\257\0\322\0\365"+
+    "\0\u0118\0\43\0\43\0\43\0\43\0\43\0\43\0\u013b"+
+    "\0\u015e\0\u0181\0\u01a4\0\u01c7\0\u01ea\0\106\0\106\0\u020d"+
+    "\0\u0230\0\u0253\0\u0276\0\u0299\0\u02bc\0\u02df\0\u0302\0\u0325"+
+    "\0\u0348\0\106\0\106\0\u036b\0\u038e\0\106\0\u03b1\0\u03d4"+
+    "\0\u03f7\0\u041a\0\u043d\0\106\0\106\0\u0460\0\u0483\0\u04a6"+
+    "\0\106\0\106\0\u04c9\0\u04ec\0\u050f\0\u0532\0\u0555\0\u0578"+
+    "\0\u059b\0\u05be\0\u05e1\0\106";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[35];
+    int [] result = new int[60];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -115,28 +119,54 @@ public class LexerCup implements java_cup.runtime.Scanner {
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\1\3\1\2\2\4\1\5\1\6\1\5\1\0"+
     "\1\7\2\3\1\10\3\3\1\11\1\12\1\13\1\14"+
-    "\1\15\1\16\1\17\1\3\1\20\1\21\33\0\1\3"+
-    "\2\22\5\0\10\3\6\0\3\3\3\0\2\4\32\0"+
-    "\1\5\1\0\1\5\30\0\1\23\24\0\1\3\2\22"+
-    "\5\0\1\3\1\24\1\25\5\3\6\0\3\3\1\0"+
-    "\1\3\2\22\5\0\4\3\1\26\3\3\6\0\3\3"+
-    "\1\0\1\3\2\22\5\0\10\3\6\0\1\27\2\3"+
-    "\1\0\1\3\2\22\5\0\10\3\6\0\1\30\2\3"+
-    "\1\0\1\3\2\22\5\0\6\3\1\31\1\3\6\0"+
-    "\3\3\1\0\1\3\1\0\1\22\5\0\10\3\6\0"+
-    "\3\3\7\23\2\0\21\23\1\0\1\3\2\22\5\0"+
-    "\5\3\1\32\2\3\6\0\3\3\1\0\1\3\2\22"+
-    "\5\0\1\33\2\3\1\34\4\3\6\0\3\3\1\0"+
-    "\1\3\2\22\5\0\1\35\7\3\6\0\2\3\1\36"+
-    "\1\0\1\3\2\22\5\0\1\37\7\3\6\0\3\3"+
-    "\1\0\1\3\2\22\5\0\6\3\1\40\1\3\6\0"+
-    "\3\3\1\0\1\3\2\22\5\0\3\3\1\41\4\3"+
-    "\6\0\3\3\1\0\1\3\2\22\5\0\1\42\7\3"+
-    "\6\0\3\3\1\0\1\3\2\22\5\0\7\3\1\43"+
-    "\6\0\3\3";
+    "\1\15\1\16\1\17\1\3\1\20\1\21\1\3\1\22"+
+    "\5\3\1\23\1\3\44\0\1\3\2\24\5\0\10\3"+
+    "\6\0\14\3\3\0\2\4\43\0\1\5\1\0\1\5"+
+    "\41\0\1\25\35\0\1\3\2\24\5\0\1\3\1\26"+
+    "\1\27\5\3\6\0\1\3\1\30\12\3\1\0\1\3"+
+    "\2\24\5\0\4\3\1\31\3\3\6\0\14\3\1\0"+
+    "\1\3\2\24\5\0\10\3\6\0\1\32\13\3\1\0"+
+    "\1\3\2\24\5\0\10\3\6\0\1\33\13\3\1\0"+
+    "\1\3\2\24\5\0\6\3\1\34\1\3\6\0\14\3"+
+    "\1\0\1\3\2\24\5\0\10\3\6\0\5\3\1\35"+
+    "\6\3\1\0\1\3\2\24\5\0\10\3\6\0\6\3"+
+    "\1\36\5\3\1\0\1\3\1\0\1\24\5\0\10\3"+
+    "\6\0\14\3\7\25\2\0\32\25\1\0\1\3\2\24"+
+    "\5\0\3\3\1\37\4\3\6\0\14\3\1\0\1\3"+
+    "\2\24\5\0\5\3\1\40\2\3\6\0\1\3\1\41"+
+    "\12\3\1\0\1\3\2\24\5\0\1\42\2\3\1\43"+
+    "\4\3\6\0\14\3\1\0\1\3\2\24\5\0\1\44"+
+    "\7\3\6\0\2\3\1\45\11\3\1\0\1\3\2\24"+
+    "\5\0\1\46\7\3\6\0\14\3\1\0\1\3\2\24"+
+    "\5\0\10\3\6\0\6\3\1\47\5\3\1\0\1\3"+
+    "\2\24\5\0\10\3\6\0\4\3\1\50\7\3\1\0"+
+    "\1\3\2\24\5\0\4\3\1\51\3\3\6\0\14\3"+
+    "\1\0\1\3\2\24\5\0\6\3\1\52\1\3\6\0"+
+    "\14\3\1\0\1\3\2\24\5\0\10\3\6\0\3\3"+
+    "\1\53\10\3\1\0\1\3\2\24\5\0\3\3\1\54"+
+    "\4\3\6\0\14\3\1\0\1\3\2\24\5\0\1\55"+
+    "\7\3\6\0\14\3\1\0\1\3\2\24\5\0\10\3"+
+    "\6\0\7\3\1\56\4\3\1\0\1\3\2\24\5\0"+
+    "\10\3\6\0\5\3\1\57\6\3\1\0\1\3\2\24"+
+    "\5\0\10\3\6\0\1\3\1\60\12\3\1\0\1\3"+
+    "\2\24\5\0\7\3\1\61\6\0\14\3\1\0\1\3"+
+    "\2\24\5\0\10\3\6\0\2\3\1\62\11\3\1\0"+
+    "\1\3\2\24\5\0\10\3\6\0\10\3\1\62\3\3"+
+    "\1\0\1\3\2\24\5\0\10\3\6\0\6\3\1\63"+
+    "\5\3\1\0\1\3\2\24\5\0\1\64\7\3\6\0"+
+    "\14\3\1\0\1\3\2\24\5\0\10\3\6\0\12\3"+
+    "\1\65\1\3\1\0\1\3\2\24\5\0\10\3\6\0"+
+    "\2\3\1\66\11\3\1\0\1\3\2\24\5\0\10\3"+
+    "\6\0\10\3\1\67\3\3\1\0\1\3\2\24\5\0"+
+    "\1\70\7\3\6\0\14\3\1\0\1\3\2\24\5\0"+
+    "\10\3\6\0\12\3\1\71\1\3\1\0\1\3\2\24"+
+    "\5\0\10\3\6\0\11\3\1\72\2\3\1\0\1\3"+
+    "\2\24\5\0\10\3\6\0\13\3\1\73\1\0\1\3"+
+    "\2\24\5\0\4\3\1\74\3\3\6\0\14\3\1\0"+
+    "\1\3\2\24\5\0\10\3\6\0\5\3\1\74\6\3";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[546];
+    int [] result = new int[1540];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -174,10 +204,10 @@ public class LexerCup implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\1\1\11\7\1\6\11\24\1";
+    "\1\1\1\11\7\1\6\11\55\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[35];
+    int [] result = new int[60];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -281,7 +311,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
     char [] map = new char[0x110000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
-    while (i < 136) {
+    while (i < 156) {
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -649,7 +679,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.DIGITO, yychar, yyline, yytext());
             }
-          case 19: break;
+          case 21: break;
           case 2: 
             { generateTable.addArrayList("ERROR");
           generateTable.addArrayList1(yytext());
@@ -657,7 +687,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.ERROR, yychar, yyline, yytext());
             }
-          case 20: break;
+          case 22: break;
           case 3: 
             { generateTable.addArrayList("NOMBRE");
           generateTable.addArrayList1(yytext());
@@ -665,11 +695,11 @@ public class LexerCup implements java_cup.runtime.Scanner {
          generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.NOMBRE, yychar, yyline, yytext());
             }
-          case 21: break;
+          case 23: break;
           case 4: 
             { /*Ignore*/
             }
-          case 22: break;
+          case 24: break;
           case 5: 
             { generateTable.addArrayList("ASIGNACION");
           generateTable.addArrayList1(yytext());
@@ -677,7 +707,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.ASIGNACION, yychar, yyline, yytext());
             }
-          case 23: break;
+          case 25: break;
           case 6: 
             { generateTable.addArrayList("PARENTESIS_A");
           generateTable.addArrayList1(yytext());
@@ -685,7 +715,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.PARENTESIS_A, yychar, yyline, yytext());
             }
-          case 24: break;
+          case 26: break;
           case 7: 
             { generateTable.addArrayList("PARENTESIS_C");
           generateTable.addArrayList1(yytext());
@@ -693,7 +723,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.PARENTESIS_C, yychar, yyline, yytext());
             }
-          case 25: break;
+          case 27: break;
           case 8: 
             { generateTable.addArrayList("MULTIPLICACION");
           generateTable.addArrayList1(yytext());
@@ -701,7 +731,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.MULTIPLICACION, yychar, yyline, yytext());
             }
-          case 26: break;
+          case 28: break;
           case 9: 
             { generateTable.addArrayList("RESTA");
           generateTable.addArrayList1(yytext());
@@ -709,7 +739,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.RESTA, yychar, yyline, yytext());
             }
-          case 27: break;
+          case 29: break;
           case 10: 
             { generateTable.addArrayList("P_COMA");
           generateTable.addArrayList1(yytext());
@@ -717,7 +747,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.P_COMA, yychar, yyline, yytext());
             }
-          case 28: break;
+          case 30: break;
           case 11: 
             { generateTable.addArrayList("PRESAS");
           generateTable.addArrayList1(yytext());
@@ -725,7 +755,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.PRESAS, yychar, yyline, yytext());
             }
-          case 29: break;
+          case 31: break;
           case 12: 
             { generateTable.addArrayList("DEPREDADORES");
           generateTable.addArrayList1(yytext());
@@ -733,7 +763,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.DEPREDADORES, yychar, yyline, yytext());
             }
-          case 30: break;
+          case 32: break;
           case 13: 
             { generateTable.addArrayList("TCD");
           generateTable.addArrayList1(yytext());
@@ -741,7 +771,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.TCD, yychar, yyline, yytext());
             }
-          case 31: break;
+          case 33: break;
           case 14: 
             { generateTable.addArrayList("TCP");
           generateTable.addArrayList1(yytext());
@@ -749,7 +779,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.TCP, yychar, yyline, yytext());
             }
-          case 32: break;
+          case 34: break;
           case 15: 
             { generateTable.addArrayList("CONCATENADOR");
           generateTable.addArrayList1(yytext());
@@ -757,7 +787,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.CONCATENADOR, yychar, yyline, yytext());
             }
-          case 33: break;
+          case 35: break;
           case 16: 
             { generateTable.addArrayList("ECDP");
           generateTable.addArrayList1(yytext());
@@ -765,7 +795,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.ECDP, yychar, yyline, yytext());
             }
-          case 34: break;
+          case 36: break;
           case 17: 
             { generateTable.addArrayList("ECAD");
           generateTable.addArrayList1(yytext());
@@ -773,7 +803,7 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.ECAD, yychar, yyline, yytext());
             }
-          case 35: break;
+          case 37: break;
           case 18: 
             { generateTable.addArrayList("P_RESERVADA");
           generateTable.addArrayList1(yytext());
@@ -781,7 +811,23 @@ public class LexerCup implements java_cup.runtime.Scanner {
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.P_RESERVADA, yychar, yyline, yytext());
             }
-          case 36: break;
+          case 38: break;
+          case 19: 
+            { generateTable.addArrayList("PRESA");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.PRESA, yychar, yyline, yytext());
+            }
+          case 39: break;
+          case 20: 
+            { generateTable.addArrayList("DEPREDADOR");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.DEPREDADOR, yychar, yyline, yytext());
+            }
+          case 40: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

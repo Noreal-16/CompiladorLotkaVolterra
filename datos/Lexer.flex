@@ -116,6 +116,20 @@ espacio=[ ,\t,\r,\n]+
           generateTable.addArrayList3(yycolumn  + 1);
           return new Symbol(sym.ECAD, yychar, yyline, yytext());
       }
+("PRESA" | "presa") {
+          generateTable.addArrayList("PRESA");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.PRESA, yychar, yyline, yytext());
+      }
+("DEPREDADOR" | "depredador") {
+          generateTable.addArrayList("DEPREDADOR");
+          generateTable.addArrayList1(yytext());
+          generateTable.addArrayList2(yyline + 1);
+          generateTable.addArrayList3(yycolumn  + 1);
+          return new Symbol(sym.DEPREDADOR, yychar, yyline, yytext());
+      }
 ("AND") {
           generateTable.addArrayList("CONCATENADOR");
           generateTable.addArrayList1(yytext());

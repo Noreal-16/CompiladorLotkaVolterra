@@ -23,25 +23,12 @@ action code
     public  List<String> variablesNombre =  new ArrayList<>();
 :}
 
-terminal ASIGNACION, PARENTESIS_A, PARENTESIS_C,DEPREDADORES,PRESAS, MULTIPLICACION,RESTA, CONCATENADOR, P_COMA, NOMBRE, DIGITO, ERROR, P_RESERVADA, DERIVADA,TCD,TCP,ECDP,ECAD;
-non terminal INICIO, VARIABLE, SENTENCIA, DECLARACION,RESULTADO, DESARROLLO, DESARROLLO_PARENTESIS2,OPERACIONP, OPERACIOND, VALOR,AUXOPERACION,PARENTESIS;
+terminal ASIGNACION, PARENTESIS_A, PARENTESIS_C,DEPREDADORES,PRESAS, MULTIPLICACION,RESTA, CONCATENADOR, P_COMA, NOMBRE, DIGITO, ERROR, P_RESERVADA, DERIVADA,TCD,TCP,ECDP,ECAD,PRESA,DEPREDADOR;
+non terminal INICIO, SENTENCIA, DECLARACION,RESULTADO, OPERACIO_ECUACIONES,DESARROLLO_DIGITO,DESARROLLO_VARIABLE, DESARROLLO_PARENTESIS2,OPERACIONP_DIGITO, OPERACIOND_DIGITO, VALOR,AUXOPERACION,PARENTESIS,OPERACIONP_VARIABLE,OPERACIOND_VARIABLE;
 INICIO ::= SENTENCIA;
-SENTENCIA ::= DECLARACION | DESARROLLO | RESULTADO |DECLARACION SENTENCIA | DESARROLLO  SENTENCIA;
+SENTENCIA ::= DECLARACION |OPERACIO_ECUACIONES RESULTADO |SENTENCIA DECLARACION  | SENTENCIA OPERACIO_ECUACIONES RESULTADO  ;
 
-DECLARACION ::= NOMBRE:nombre ASIGNACION DIGITO:valor P_COMA
-   {:
-    Utilidades.addVarible(nombre.toString(), valor.toString());
-   :}| NOMBRE:nombre  ASIGNACION NOMBRE:nombre_a P_COMA {:
-    Utilidades.addVarible(nombre.toString(), nombre_a.toString());
-   :}|NOMBRE:nombre ASIGNACION OPERACIONP:operador P_COMA {:
-    Utilidades.addVarible(nombre.toString(), operador.toString());
-   :}|PRESAS:operador ASIGNACION NOMBRE:nombre P_COMA {:
-    Utilidades.addVarible(operador.toString(), nombre.toString());
-   :}|DEPREDADORES:operador ASIGNACION NOMBRE:nombre P_COMA {:
-    Utilidades.addVarible(operador.toString(), nombre.toString());
-   :}| NOMBRE:nombre ASIGNACION OPERACIOND:operador P_COMA{:
-    Utilidades.addVarible(nombre.toString(), operador.toString());
-   :}| TCP:nombre ASIGNACION  DIGITO:dig P_COMA{:
+DECLARACION ::= TCP:nombre ASIGNACION  DIGITO:dig P_COMA{:
     Utilidades.addVarible(nombre.toString(), dig.toString());
    :}| TCD:nombre ASIGNACION DIGITO:dig P_COMA{:
     Utilidades.addVarible(nombre.toString(), dig.toString());
@@ -49,41 +36,124 @@ DECLARACION ::= NOMBRE:nombre ASIGNACION DIGITO:valor P_COMA
     Utilidades.addVarible(nombre.toString(), dig.toString());
    :}| ECAD:nombre ASIGNACION DIGITO:dig P_COMA{:
     Utilidades.addVarible(nombre.toString(), dig.toString());
-   :};
-VALOR ::= DIGITO:dig {:
-//if (!variables.contains(Double.parseDouble(dig.toString()))) {
+   :}|PRESA:nombre ASIGNACION DIGITO:dig P_COMA{:
+    Utilidades.addVarible(nombre.toString(), dig.toString());
+    :}|DEPREDADOR:nombre ASIGNACION DIGITO:dig P_COMA{:
+    Utilidades.addVarible(nombre.toString(), dig.toString());
+    :};
+OPERACIO_ECUACIONES::= DESARROLLO_DIGITO | DESARROLLO_VARIABLE;
 
-a = Double.parseDouble(dig.toString());
-variables.add(a);
-//}else{
-//System.out.println("No se puede agregar ma valores ");
-//}
-:}| NOMBRE:nombre {:
-if (!variablesNombre.contains(nombre.toString())) {
-palabras = nombre.toString();
-variablesNombre.add(palabras);
-}
-:};
-DESARROLLO ::= PRESAS ASIGNACION OPERACIONP P_COMA DEPREDADORES ASIGNACION OPERACIOND P_COMA{:
+DESARROLLO_DIGITO::= PRESAS ASIGNACION OPERACIONP_DIGITO P_COMA DEPREDADORES ASIGNACION OPERACIOND_DIGITO  P_COMA{:
 Utilidades.OperacionLotkaVolterra(variables);
 :};
-
 // Dx = a1 * 5 - 12*8*9; PRINT Dx AND Dy;
-OPERACIONP ::= TCP MULTIPLICACION VALOR RESTA ECDP MULTIPLICACION  VALOR RESTA VALOR|
-TCP:valor_a MULTIPLICACION VALOR:valor_presa RESTA PARENTESIS_A ECDP:valor_c MULTIPLICACION VALOR:valor_d MULTIPLICACION VALOR:valor_depredador PARENTESIS_C {:
-
+OPERACIONP_DIGITO::= DIGITO:valor_a MULTIPLICACION DIGITO:valor_b RESTA DIGITO:valor_c MULTIPLICACION  DIGITO:valor_d MULTIPLICACION DIGITO:valor_e {:
+variables.add(Double.parseDouble(valor_a.toString()));
+variables.add(Double.parseDouble(valor_b.toString()));
+variables.add(Double.parseDouble(valor_c.toString()));
+variables.add(Double.parseDouble(valor_d.toString()));
+variables.add(Double.parseDouble(valor_e.toString()));
 :}|
-              PARENTESIS_A TCP MULTIPLICACION VALOR PARENTESIS_C RESTA  ECDP MULTIPLICACION VALOR MULTIPLICACION VALOR |
-              PARENTESIS_A TCP MULTIPLICACION VALOR PARENTESIS_C RESTA PARENTESIS_A ECDP MULTIPLICACION VALOR MULTIPLICACION VALOR PARENTESIS_C;
+                DIGITO:valor_a MULTIPLICACION DIGITO:valor_b RESTA PARENTESIS_A DIGITO:valor_c MULTIPLICACION DIGITO:valor_d MULTIPLICACION DIGITO:valor_e PARENTESIS_C {:
+                variables.add(Double.parseDouble(valor_a.toString()));
+                variables.add(Double.parseDouble(valor_b.toString()));
+                variables.add(Double.parseDouble(valor_c.toString()));
+                variables.add(Double.parseDouble(valor_d.toString()));
+                variables.add(Double.parseDouble(valor_e.toString()));
+                :}|
+                PARENTESIS_A DIGITO:valor_a MULTIPLICACION DIGITO:valor_b PARENTESIS_C RESTA  DIGITO:valor_c MULTIPLICACION DIGITO:valor_d MULTIPLICACION DIGITO:valor_e {:
+                variables.add(Double.parseDouble(valor_a.toString()));
+                variables.add(Double.parseDouble(valor_b.toString()));
+                variables.add(Double.parseDouble(valor_c.toString()));
+                variables.add(Double.parseDouble(valor_d.toString()));
+                variables.add(Double.parseDouble(valor_e.toString()));
+                :}|
+                PARENTESIS_A DIGITO:valor_a MULTIPLICACION DIGITO:valor_b PARENTESIS_C RESTA PARENTESIS_A DIGITO:valor_c MULTIPLICACION DIGITO:valor_d MULTIPLICACION DIGITO:valor_e PARENTESIS_C {:
+                variables.add(Double.parseDouble(valor_a.toString()));
+                variables.add(Double.parseDouble(valor_b.toString()));
+                variables.add(Double.parseDouble(valor_c.toString()));
+                variables.add(Double.parseDouble(valor_d.toString()));
+                variables.add(Double.parseDouble(valor_e.toString()));
+                :};
 
-OPERACIOND::= ECAD MULTIPLICACION VALOR MULTIPLICACION VALOR  RESTA  TCD MULTIPLICACION VALOR |
-              PARENTESIS_A ECAD MULTIPLICACION VALOR MULTIPLICACION VALOR PARENTESIS_C RESTA  TCD MULTIPLICACION VALOR{:
-              :}  |
-              PARENTESIS_A ECAD MULTIPLICACION VALOR MULTIPLICACION VALOR PARENTESIS_C RESTA PARENTESIS_A TCD MULTIPLICACION VALOR PARENTESIS_C |
-              ECAD MULTIPLICACION VALOR MULTIPLICACION VALOR  RESTA PARENTESIS_A TCD MULTIPLICACION VALOR PARENTESIS_C;
+OPERACIOND_DIGITO::= DIGITO:valor_1 MULTIPLICACION DIGITO:valor_2 MULTIPLICACION DIGITO:valor_3  RESTA  DIGITO:valor_4 MULTIPLICACION DIGITO:valor_5 {:
+variables.add(Double.parseDouble(valor_1.toString()));
+variables.add(Double.parseDouble(valor_2.toString()));
+variables.add(Double.parseDouble(valor_3.toString()));
+variables.add(Double.parseDouble(valor_4.toString()));
+variables.add(Double.parseDouble(valor_5.toString()));
+:} |
+                PARENTESIS_A DIGITO:valor_1 MULTIPLICACION DIGITO:valor_2 MULTIPLICACION DIGITO:valor_3 PARENTESIS_C RESTA  DIGITO:valor_4 MULTIPLICACION DIGITO:valor_5 {:
+                variables.add(Double.parseDouble(valor_1.toString()));
+                variables.add(Double.parseDouble(valor_2.toString()));
+                variables.add(Double.parseDouble(valor_3.toString()));
+                variables.add(Double.parseDouble(valor_4.toString()));
+                variables.add(Double.parseDouble(valor_5.toString()));
+                :}|
+                PARENTESIS_A DIGITO:valor_1 MULTIPLICACION DIGITO:valor_2 MULTIPLICACION DIGITO:valor_3 PARENTESIS_C RESTA PARENTESIS_A DIGITO:valor_4 MULTIPLICACION DIGITO:valor_5 PARENTESIS_C {:
+                variables.add(Double.parseDouble(valor_1.toString()));
+                variables.add(Double.parseDouble(valor_2.toString()));
+                variables.add(Double.parseDouble(valor_3.toString()));
+                variables.add(Double.parseDouble(valor_4.toString()));
+                variables.add(Double.parseDouble(valor_5.toString()));
+                :}|
+                DIGITO:valor_1 MULTIPLICACION DIGITO:valor_2 MULTIPLICACION DIGITO:valor_3  RESTA PARENTESIS_A DIGITO:valor_4 MULTIPLICACION DIGITO:valor_5 PARENTESIS_C {:
+                variables.add(Double.parseDouble(valor_1.toString()));
+                variables.add(Double.parseDouble(valor_2.toString()));
+                variables.add(Double.parseDouble(valor_3.toString()));
+                variables.add(Double.parseDouble(valor_4.toString()));
+                variables.add(Double.parseDouble(valor_5.toString()));
+                :};
+
+
+DESARROLLO_VARIABLE::= PRESAS ASIGNACION OPERACIONP_VARIABLE  P_COMA DEPREDADORES ASIGNACION OPERACIOND_VARIABLE  P_COMA {:
+Utilidades.operarVariables(variablesNombre);
+:};
+
+OPERACIONP_VARIABLE::= TCP:valor_a MULTIPLICACION PRESA:valor_b RESTA ECDP:valor_c MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR:valor_d {:
+variablesNombre.add(valor_a.toString());
+variablesNombre.add(valor_b.toString());
+variablesNombre.add(valor_c.toString());
+variablesNombre.add(valor_d.toString());
+:}|
+                TCP:valor_a MULTIPLICACION PRESA:valor_b RESTA PARENTESIS_A ECDP:valor_c MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR:valor_d PARENTESIS_C {:
+                variablesNombre.add(valor_a.toString());
+                variablesNombre.add(valor_b.toString());
+                variablesNombre.add(valor_c.toString());
+                variablesNombre.add(valor_d.toString());
+                :}|
+                PARENTESIS_A TCP:valor_a MULTIPLICACION PRESA:valor_b PARENTESIS_C RESTA ECDP:valor_c MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR:valor_d {:
+                variablesNombre.add(valor_a.toString());
+                variablesNombre.add(valor_b.toString());
+                variablesNombre.add(valor_c.toString());
+                variablesNombre.add(valor_d.toString());
+                :}|
+                PARENTESIS_A TCP:valor_a MULTIPLICACION PRESA:valor_b PARENTESIS_C RESTA PARENTESIS_A ECDP:valor_c MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR:valor_d PARENTESIS_C {:
+                variablesNombre.add(valor_a.toString());
+                variablesNombre.add(valor_b.toString());
+                variablesNombre.add(valor_c.toString());
+                variablesNombre.add(valor_d.toString());
+                :};
+
+
+OPERACIOND_VARIABLE::= ECAD:valor_1 MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR RESTA TCD:valor_2 MULTIPLICACION DEPREDADOR {:
+variablesNombre.add(valor_1.toString());
+variablesNombre.add(valor_2.toString());
+:}|
+
+                PARENTESIS_A ECAD:valor_1 MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR PARENTESIS_C RESTA  TCD:valor_2 MULTIPLICACION DEPREDADOR {:
+                variablesNombre.add(valor_1.toString());
+                variablesNombre.add(valor_2.toString());
+                :}|
+                PARENTESIS_A ECAD:valor_1 MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR PARENTESIS_C RESTA PARENTESIS_A TCD:valor_2 MULTIPLICACION DEPREDADOR PARENTESIS_C {:
+                variablesNombre.add(valor_1.toString());
+                variablesNombre.add(valor_2.toString());
+                :}|
+                ECAD:valor_1 MULTIPLICACION PRESA MULTIPLICACION DEPREDADOR  RESTA PARENTESIS_A TCD:valor_2 MULTIPLICACION DEPREDADOR PARENTESIS_C {:
+                variablesNombre.add(valor_1.toString());
+                variablesNombre.add(valor_2.toString());
+                :};
 
 RESULTADO::=  P_RESERVADA PRESAS:presa CONCATENADOR DEPREDADORES:depredador P_COMA {:
-System.out.println("Ingreso" + presa);
-System.out.println("Ingresos" + depredador);
-
+Utilidades.imprimirLotkaVolterra(presa.toString(), depredador.toString());
 :};
