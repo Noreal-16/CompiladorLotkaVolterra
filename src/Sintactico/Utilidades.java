@@ -68,7 +68,7 @@ public class Utilidades {
      *
      * @param presas
      */
-    public static void OperacionLotkaVolterra(List<Double> presas, String tiempo) {
+    public static void OperacionLotkaVolterra(List<Double> presas, String tiempo) throws VariableDeclaradaException {
 
         List<Double> valoresPresas = new ArrayList<>();
         List<Double> valoresDepredador = new ArrayList<>();
@@ -86,10 +86,14 @@ public class Utilidades {
         double f0, f1;
 
         int tiemposEvolucion = 0;
-        for (int i = 0; i <variables.size(); i++) {
+        try {
+            for (int i = 0; i <variables.size(); i++) {
             if (tiempo.equals(variables.get(i).getNombre())) {
                 tiemposEvolucion = Integer.parseInt(variables.get(i).getValor().toString());
             }
+        }
+        } catch (Exception e) {
+            throw new VariableDeclaradaException("La Variable " + " -> " + tiempo + " debe ser unicamente entero ");
         }
 
         double presasV = presas.get(1);
@@ -120,7 +124,7 @@ public class Utilidades {
      *
      * @param lista
      */
-    public static void operarVariables(List<String> lista, String tiempo) {
+    public static void operarVariables(List<String> lista, String tiempo) throws VariableDeclaradaException {
         Double tcp = 0.0, presa = 0.0, ecdp = 0.0, depredador = 0.0, ecad = 0.0, tcd = 0.0;
 
         for (int i = 0; i < variables.size(); i++) {
@@ -148,11 +152,17 @@ public class Utilidades {
         double valorD = depredador;
 
         int tiemposEvolucion = 0;
-        for (int i = 0; i <variables.size(); i++) {
+        
+         try {
+            for (int i = 0; i <variables.size(); i++) {
             if (tiempo.equals(variables.get(i).getNombre())) {
                 tiemposEvolucion = Integer.parseInt(variables.get(i).getValor().toString());
             }
         }
+        } catch (Exception e) {
+            throw new VariableDeclaradaException("La Variable " + " -> " + tiempo + " debe ser unicamente entero ");
+        }
+        
 
         for (int i = 1; i <= tiemposEvolucion; i++) {
             f0 = valorP + (h * ((tcp * valorP) - (ecdp * valorP * valorD)));
