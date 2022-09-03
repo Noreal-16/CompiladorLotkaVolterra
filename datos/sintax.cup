@@ -195,4 +195,5 @@ variablesNombre.add(valor_2.toString());
 
 RESULTADO::=  P_RESERVADA PRESAS:presa CONCATENADOR DEPREDADORES:depredador P_COMA {:
 Utilidades.imprimirLotkaVolterra(presa.toString(), depredador.toString());
+variablesNombre.clear();
 :};

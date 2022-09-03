@@ -116,6 +116,7 @@ public class Utilidades {
             valoresDepredador.set(0, f1);
             valoresDepredador.set(1, f1);
             valoresDepredador.set(2, f1);
+
         }
     }
 
@@ -162,7 +163,6 @@ public class Utilidades {
         } catch (Exception e) {
             throw new VariableDeclaradaException("La Variable " + " -> " + tiempo + " debe ser unicamente entero ");
         }
-        
 
         for (int i = 1; i <= tiemposEvolucion; i++) {
             f0 = valorP + (h * ((tcp * valorP) - (ecdp * valorP * valorD)));
@@ -183,7 +183,6 @@ public class Utilidades {
      * Metodo para imprimir resultado Presa Depredador
      */
     public static void imprimirLotkaVolterra(String ec1, String ec2) {
-        int contador = 0;
         double valorDepredador = 0.0;
         double valorPresa = 0.0;
         for (int i = 0; i < resultadoPresa.size(); i++) {
@@ -191,8 +190,12 @@ public class Utilidades {
                 valorPresa = Double.parseDouble(resultadoPresa.get(i).toString());
                 valorDepredador = Double.parseDouble(resultadoDepredador.get(j).toString());
             }
-            contador = i + 1;
         }
-            System.out.println("Presas en el  anios " + contador + " => " + ec1 + " " + valorPresa + " Depredadores en el anio " + contador + " => " + ec2 + " " + valorDepredador);
+        for (int i = 0; i <variables.size() ; i++) {
+            if (variables.get(i).getNombre().contains("tiempo") | variables.get(i).getNombre().contains("tmp") | variables.get(i).getNombre().contains("time") |variables.get(i).getNombre().contains("TIEMPO")) {
+                System.out.println("Presas en el  anios " + variables.get(i).getValor() + " => " + ec1 + " " + valorPresa + " Depredadores en el anio " + variables.get(i).getValor() + " => " + ec2 + " " + valorDepredador);
+            }
+        }
+        variables.clear();
     }
 }

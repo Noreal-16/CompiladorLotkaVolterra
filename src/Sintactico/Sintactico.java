@@ -72,8 +72,12 @@ public class Sintactico {
          *  Dx = 0.5 * 2  - (0.7*2*1); Dy = (0.35*2*1) - 0.35 * 1; PRINT Dx AND Dy;
          */
         //GeneradorLexer();
-        String cadena = " TCP=0.5; ECDP=0.7; TCD=0.35;  ECAD=0.35; presa= 2;  depredador = 1; tmp=2.0; " +
-                " tmp Dx = 0.5 * 2  - (0.7*2*1); Dy = (0.35*2*1) - 0.35 * 1; PRINT Dx AND Dy; ";
+        String cadena = " TCP=0.5; ECDP=0.7; TCD=0.35;  ECAD=0.35; presa= 2;  depredador = 1; tmp=4; " +
+                "tmp Dx = TCP * presa  - (ECDP*presa*depredador); Dy = (ECAD*presa*depredador) - TCD * depredador; PRINT Dx AND Dy; " +
+                "tiempo = 3;" +
+                "tiempo Dx = 0.5 * 2  - (0.7*2*1); Dy = (0.35*2*1) - 0.35 * 1; PRINT Dx AND Dy; " +
+                "TCP=0.5; ECDP=0.7; TCD=0.35;  ECAD=0.35; presa= 2;  depredador = 1; tmp=2;" +
+                "tmp Dx = TCP * presa  - (ECDP*presa*depredador); Dy = (ECAD*presa*depredador) - TCD * depredador; PRINT Dx AND Dy;";
         LexerCup lexerCup = new LexerCup(new StringReader(cadena));
         Sintax s = new Sintax(lexerCup);
         try {
