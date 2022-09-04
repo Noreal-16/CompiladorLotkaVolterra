@@ -1,6 +1,8 @@
 package Sintactico;
 
+import Exceptions.ValorEnteroException;
 import Exceptions.VariableDeclaradaException;
+import Exceptions.VariableNulaException;
 import org.apache.tools.ant.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -38,11 +40,11 @@ public class Utilidades {
             }
         }
     }
-    public static Boolean verificar(String  nombre)throws VariableDeclaradaException{
+    public static Boolean verificar(String  nombre)throws VariableNulaException{
         if(buscarPosicion(nombre) >= 0){
             return true;
         }else
-            throw new VariableDeclaradaException("La varibale: " +nombre+" "+"no esta definida");
+            throw new VariableNulaException("La varibale: " +nombre+" "+"no esta definida");
         
        
     }
@@ -71,7 +73,7 @@ public class Utilidades {
      *
      * @param presas
      */
-    public static void OperacionLotkaVolterra(List<Double> presas, String tiempo) throws VariableDeclaradaException {
+    public static void OperacionLotkaVolterra(List<Double> presas, String tiempo) throws ValorEnteroException {
 
         List<Double> valoresPresas = new ArrayList<>();
         List<Double> valoresDepredador = new ArrayList<>();
@@ -96,7 +98,7 @@ public class Utilidades {
             }
         }
         } catch (Exception e) {
-            throw new VariableDeclaradaException("La Variable " + " -> " + tiempo + " debe ser unicamente entero ");
+            throw new ValorEnteroException("La Variable " + " -> " + tiempo + " debe ser unicamente entero ");
         }
 
         double presasV = presas.get(1);
@@ -128,7 +130,7 @@ public class Utilidades {
      *
      * @param lista
      */
-    public static void operarVariables(List<String> lista, String tiempo) throws VariableDeclaradaException {
+    public static void operarVariables(List<String> lista, String tiempo) throws ValorEnteroException {
         Double tcp = 0.0, presa = 0.0, ecdp = 0.0, depredador = 0.0, ecad = 0.0, tcd = 0.0;
 
         for (int i = 0; i < variables.size(); i++) {
@@ -164,7 +166,7 @@ public class Utilidades {
             }
         }
         } catch (Exception e) {
-            throw new VariableDeclaradaException("La Variable " + " -> " + tiempo + " debe ser unicamente entero ");
+            throw new ValorEnteroException("La Variable " + " -> " + tiempo + " debe ser unicamente entero ");
         }
 
         for (int i = 1; i <= tiemposEvolucion; i++) {
