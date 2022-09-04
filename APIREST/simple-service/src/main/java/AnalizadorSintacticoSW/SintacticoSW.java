@@ -59,8 +59,8 @@ public class SintacticoSW {
             }else{
                System.out.println("Hay un ERROR " + e); 
                
-               String msgerror = " Hay un error ";
-               return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\""+ msgerror+e+"\"}").header("Access-Control-Allow-Origin","*").build();
+               String msgerror = " Hay un error " +e;
+               return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\""+ msgerror+"\"}").header("Access-Control-Allow-Origin","*").build();
             }
             
         }
