@@ -34,12 +34,12 @@ public class SintacticoSW {
         LexerCup lexerCup = new LexerCup(new StringReader(codigo));
         Sintax s = new Sintax(lexerCup);
         try {
-            //s.parse();
+            s.parse();
             
-            Utilidades.variables.clear();
-            System.out.println("json"+ Utilidades.resultadoVariables);
+            
             return Response.ok("{\"message\":\"" +Utilidades.resultadoVariables+"\"}").header("Access-Control-Allow-Origin","*").build();
-              //return Response.ok(Utilidades.resultadoVariables).header("Access-Control-Allow-Origin","*").build();
+            
+//return Response.ok(Utilidades.resultadoVariabl;es).header("Access-Control-Allow-Origin","*").build();
 
 //generateTable.imprimirLista();
         }catch (Exception e){
@@ -65,6 +65,7 @@ public class SintacticoSW {
         
         
     }
+    
     
 }
 

@@ -20,12 +20,15 @@
              
             console.log("resultado"+data.message)
 
-              //$("#resp").html(data.message);
+            $("#resp").html(data.message);
+            document.getElementById("resp").className="alert alert-success"
               
           },
           error:function(error){
             console.log("error del ajax"+error);
             $("#resp").html(error.responseJSON.message);
+            document.getElementById("resp").className="alert alert-danger";
+
           }
         });
       });
@@ -78,7 +81,7 @@
     
           </div>
           <div class="column">
-            <p id="resp" class="alert alert-primary" role="alert"></p>
+            <p id="resp" role="alert"></p>
 
     
           </div>
