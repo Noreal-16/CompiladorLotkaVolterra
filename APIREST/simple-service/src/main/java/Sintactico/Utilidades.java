@@ -35,6 +35,7 @@ public class Utilidades {
         for (int i = 0; i < variables.size() - 1; i++) {
             for (int j = i + 1; j < variables.size(); j++) {
                 if (variables.get(i).getNombre().equals(variables.get(j).getNombre())) {
+                    //variables.clear();
                     throw new VariableDeclaradaException("La Variable " + " -> " + variables.get(j).getNombre() + " ya se encuentra definida ");
                 }
             }
@@ -92,12 +93,15 @@ public class Utilidades {
 
         int tiemposEvolucion = 0;
         try {
+            System.out.println("----Tiempo" + tiempo);
             for (int i = 0; i <variables.size(); i++) {
             if (tiempo.equals(variables.get(i).getNombre())) {
+                
                 tiemposEvolucion = Integer.parseInt(variables.get(i).getValor().toString());
             }
         }
         } catch (Exception e) {
+            //variables.clear();
             throw new ValorEnteroException("La Variable " + " -> " + tiempo + " debe ser unicamente entero ");
         }
 
@@ -167,7 +171,8 @@ public class Utilidades {
             }
         }
         } catch (Exception e) {
-            throw new ValorEnteroException("La Variable " + " -> " + tiempo + " debe ser unicamente entero ");
+            //variables.clear();
+            throw new ValorEnteroException("La Variable --- " + " -> " + tiempo + " debe ser unicamente entero ");
         }
 
         for (int i = 1; i <= tiemposEvolucion; i++) {
@@ -192,20 +197,23 @@ public class Utilidades {
     
 
     public static void imprimirLotkaVolterra(String ec1, String ec2) {
-        double valorDepredador = 0.0;
-        double valorPresa = 0.0;
-        for (int i = 0; i < resultadoPresa.size(); i++) {
-            for (int j = 0; j < resultadoDepredador.size(); j++) {
-                valorPresa = Double.parseDouble(resultadoPresa.get(i).toString());
-                valorDepredador = Double.parseDouble(resultadoDepredador.get(j).toString());
+        try {
+            double valorDepredador = 0.0;
+            double valorPresa = 0.0;
+            for (int i = 0; i < resultadoPresa.size(); i++) {
+                for (int j = 0; j < resultadoDepredador.size(); j++) {
+                    valorPresa = Double.parseDouble(resultadoPresa.get(i).toString());
+                    valorDepredador = Double.parseDouble(resultadoDepredador.get(j).toString());
+                }
             }
-        }
-        for (int i = 0; i <variables.size() ; i++) {
-            if (variables.get(i).getNombre().contains("tiempo") | variables.get(i).getNombre().contains("tmp") | variables.get(i).getNombre().contains("time") |variables.get(i).getNombre().contains("TIEMPO")) {
-                
-                result = "Presas en el  anios " + variables.get(i).getValor() + " => " + ec1 + " " + valorPresa + " Depredadores en el anio " + variables.get(i).getValor() + " => " + ec2 + " " + valorDepredador;System.out.println("Presas en el  anios " + variables.get(i).getValor() + " => " + ec1 + " " + valorPresa + " Depredadores en el anio " + variables.get(i).getValor() + " => " + ec2 + " " + valorDepredador);
-                resultadoVariables.add(result);
+            for (int i = 0; i <variables.size() ; i++) {
+                if (variables.get(i).getNombre().contains("tiempo") | variables.get(i).getNombre().contains("tmp") | variables.get(i).getNombre().contains("time") |variables.get(i).getNombre().contains("TIEMPO")) {
+
+                    result = "Presas en el  anios " + variables.get(i).getValor() + " => " + ec1 + " " + valorPresa + " Depredadores en el anio " + variables.get(i).getValor() + " => " + ec2 + " " + valorDepredador;System.out.println("Presas en el  anios " + variables.get(i).getValor() + " => " + ec1 + " " + valorPresa + " Depredadores en el anio " + variables.get(i).getValor() + " => " + ec2 + " " + valorDepredador);
+                    resultadoVariables.add(result);
+                }
             }
+        } catch (Exception e) {
         }
         
         variables.clear();

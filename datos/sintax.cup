@@ -50,7 +50,11 @@ OPERACIO_ECUACIONES::= DESARROLLO_DIGITO | DESARROLLO_VARIABLE;
 
 //Desarrollo de operaciones con Iconos
 DESARROLLO_DIGITO::= TIEMPO:valor_t  PRESAS ASIGNACION OPERACIONP_DIGITO P_COMA DEPREDADORES ASIGNACION OPERACIOND_DIGITO  P_COMA{:
+if(Utilidades.verificar(valor_t.toString())){
 Utilidades.OperacionLotkaVolterra(variables,valor_t.toString());
+
+}
+
 :};
 // Dx = a1 * 5 - 12*8*9; PRINT Dx AND Dy;
 OPERACIONP_DIGITO::= DIGITO:valor_a MULTIPLICACION DIGITO:valor_b RESTA DIGITO:valor_c MULTIPLICACION  DIGITO:valor_d MULTIPLICACION DIGITO:valor_e {:

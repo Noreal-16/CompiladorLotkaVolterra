@@ -61,7 +61,7 @@ public class SintacticoSW {
                errorMensaje = " Hay un error " +e;
                //return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\""+ msgerror+"\"}").header("Access-Control-Allow-Origin","*").build();
             }
-            
+            Utilidades.variables.clear();
             return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\""+ errorMensaje+"\"}").header("Access-Control-Allow-Origin","*").build();
             
         }
