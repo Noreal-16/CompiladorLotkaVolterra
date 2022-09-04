@@ -14,6 +14,7 @@ import Sintactico.Utilidades;
 
 import java.io.StringReader;
 import java.util.Base64;
+import java.util.List;
 import java_cup.runtime.Symbol;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -29,12 +30,14 @@ public class SintacticoSW {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getResult(@PathParam("codigo") String code){
+        Utilidades.resultadoVariables.clear();
         System.out.println("Lo que me enviaste"+code);
         String codigo = new String (Base64.getDecoder().decode(code));
         LexerCup lexerCup = new LexerCup(new StringReader(codigo));
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
+            //Utilidades.resultadoVariables.clear();
             
             
             return Response.ok("{\"message\":\"" +Utilidades.resultadoVariables+"\"}").header("Access-Control-Allow-Origin","*").build();
@@ -65,7 +68,10 @@ public class SintacticoSW {
         
         
     }
+   
     
     
 }
+
+
 
