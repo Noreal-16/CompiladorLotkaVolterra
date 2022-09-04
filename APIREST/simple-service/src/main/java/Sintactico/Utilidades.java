@@ -130,8 +130,9 @@ public class Utilidades {
      *
      * @param lista
      */
-    public static void operarVariables(List<String> lista, String tiempo) throws ValorEnteroException {
+    public static void operarVariables(List<String> lista, String tiempo) throws ValorEnteroException, VariableDeclaradaException {
         Double tcp = 0.0, presa = 0.0, ecdp = 0.0, depredador = 0.0, ecad = 0.0, tcd = 0.0;
+        validarEntradas();
 
         for (int i = 0; i < variables.size(); i++) {
             if (lista.get(0).equals(variables.get(i).getNombre())) {

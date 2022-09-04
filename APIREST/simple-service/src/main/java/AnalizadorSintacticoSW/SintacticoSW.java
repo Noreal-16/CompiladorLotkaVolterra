@@ -31,13 +31,14 @@ public class SintacticoSW {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getResult(@PathParam("codigo") String code){
         Utilidades.resultadoVariables.clear();
+        String errorMensaje ="";
         System.out.println("Lo que me enviaste"+code);
         String codigo = new String (Base64.getDecoder().decode(code));
         LexerCup lexerCup = new LexerCup(new StringReader(codigo));
-        String errorMensaje;
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
+            //Utilidades.validarEntradas();
             //Utilidades.resultadoVariables.clear();
             
             
@@ -52,10 +53,7 @@ public class SintacticoSW {
             //e.printStackTrace();
             Symbol sym = s.getS();
             if(sym != null){
-                //System.out.println("Error Syntactico en la linea " + (sym.right + 1) + " Columna " +  (sym.left + 1) + " Texto " + (sym.value));
-                //String msg=" Error Syntactico en la linea ";
-                //String msg1=" Columna ";
-                //String msg2=" Texto ";
+                
                 errorMensaje = "Error Syntactico en la linea " + (sym.right + 1) + " Columna " +  (sym.left + 1) + " Texto " + (sym.value);
                 //return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\""+msg+(sym.right + 1)+msg1+(sym.left + 1)+msg2+(sym.value)+"\"}").header("Access-Control-Allow-Origin","*").build();
             }else{
