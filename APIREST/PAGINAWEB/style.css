@@ -1,0 +1,29 @@
+.container-logos{
+    align-items: center;
+    font-family: system-ui;
+    display: flex;
+    padding: 4vw;
+    height: 6vw;
+    font-size: 1vw;
+    border-radius: 1vw;
+    box-shadow: 0px 1px 14px 0px rgba(0,0,0,0.75);
+
+}
+.img-unl{
+    height: 4vw;
+    margin-right: 10%;
+}
+.img-cis{
+    height: 4vw;
+    margin-left: 15%;
+}
+.container-descripcion{
+    padding: 2vw;
+    text-align: justify;
+    font-family: system-ui;
+}
+.ecuaciones{
+    margin-left: 40%;
+    box-shadow: 0px 4px 22px 0px rgba(0,0,0,0.75);
+
+}
