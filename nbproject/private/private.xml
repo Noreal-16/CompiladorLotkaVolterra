@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/daskside/NetBeansProjects/proyectoanalizador_lotkavolterra/datos/Lexer.flex</file>
-            <file>file:/home/daskside/NetBeansProjects/proyectoanalizador_lotkavolterra/datos/sintax.cup</file>
-            <file>file:/home/daskside/NetBeansProjects/proyectoanalizador_lotkavolterra/src/Sintactico/Sintactico.java</file>
-            <file>file:/home/daskside/NetBeansProjects/proyectoanalizador_lotkavolterra/src/AnalizadorSintactico/LexerCup.java</file>
-            <file>file:/home/daskside/NetBeansProjects/proyectoanalizador_lotkavolterra/src/AnalizadorSintactico/sym.java</file>
-            <file>file:/home/daskside/NetBeansProjects/proyectoanalizador_lotkavolterra/src/Sintactico/Utilidades.java</file>
+            <file>file:/home/leon/NetBeansProjects/proyectoanalizador_lotkavolterra/datos/sintax.cup</file>
+            <file>file:/home/leon/NetBeansProjects/proyectoanalizador_lotkavolterra/src/Sintactico/Utilidades.java</file>
+            <file>file:/home/leon/NetBeansProjects/proyectoanalizador_lotkavolterra/datos/Lexer.flex</file>
+            <file>file:/home/leon/NetBeansProjects/proyectoanalizador_lotkavolterra/src/AnalizadorSintactico/Sintax.java</file>
+            <file>file:/home/leon/NetBeansProjects/proyectoanalizador_lotkavolterra/src/Sintactico/Sintactico.java</file>
         </group>
     </open-files>
 </project-private>
