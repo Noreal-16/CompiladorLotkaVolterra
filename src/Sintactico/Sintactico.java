@@ -85,11 +85,13 @@ public class Sintactico {
             //generateTable.imprimirLista();
             Utilidades.validarEntradas();
         } catch (Exception e) {
-            System.out.println("Hay un ERROR " + e);
+            //System.out.println("Hay un ERROR " + e);
             //e.printStackTrace();
             Symbol sym = s.getS();
             if (sym != null) {
                 System.out.println("Error Syntactico en la linea " + (sym.right + 1) + " Columna " + (sym.left + 1) + " Texto " + (sym.value));
+            }else{
+                System.out.println("Hay un ERROR " + e); 
             }
         }
 

@@ -34,6 +34,7 @@ public class SintacticoSW {
         System.out.println("Lo que me enviaste"+code);
         String codigo = new String (Base64.getDecoder().decode(code));
         LexerCup lexerCup = new LexerCup(new StringReader(codigo));
+        String errorMensaje;
         Sintax s = new Sintax(lexerCup);
         try {
             s.parse();
@@ -51,17 +52,19 @@ public class SintacticoSW {
             //e.printStackTrace();
             Symbol sym = s.getS();
             if(sym != null){
-                System.out.println("Error Syntactico en la linea " + (sym.right + 1) + " Columna " +  (sym.left + 1) + " Texto " + (sym.value));
-                String msg=" Error Syntactico en la linea ";
-                String msg1=" Columna ";
-                String msg2=" Texto ";
-                return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\""+msg+(sym.right + 1)+msg1+(sym.left + 1)+msg2+(sym.value)+"\"}").header("Access-Control-Allow-Origin","*").build();
+                //System.out.println("Error Syntactico en la linea " + (sym.right + 1) + " Columna " +  (sym.left + 1) + " Texto " + (sym.value));
+                //String msg=" Error Syntactico en la linea ";
+                //String msg1=" Columna ";
+                //String msg2=" Texto ";
+                errorMensaje = "Error Syntactico en la linea " + (sym.right + 1) + " Columna " +  (sym.left + 1) + " Texto " + (sym.value);
+                //return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\""+msg+(sym.right + 1)+msg1+(sym.left + 1)+msg2+(sym.value)+"\"}").header("Access-Control-Allow-Origin","*").build();
             }else{
-               System.out.println("Hay un ERROR " + e); 
-               
-               String msgerror = " Hay un error " +e;
-               return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\""+ msgerror+"\"}").header("Access-Control-Allow-Origin","*").build();
+               //System.out.println("Hay un ERROR " + e); 
+               errorMensaje = " Hay un error " +e;
+               //return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\""+ msgerror+"\"}").header("Access-Control-Allow-Origin","*").build();
             }
+            
+            return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\":\""+ errorMensaje+"\"}").header("Access-Control-Allow-Origin","*").build();
             
         }
         
